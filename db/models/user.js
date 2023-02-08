@@ -16,10 +16,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       first_name: DataTypes.TEXT,
       last_name: DataTypes.TEXT,
-      phone_number: DataTypes.INTEGER,
+      phone_number: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          len: [8],
+          notNull: { msg: "Please enter a valid phone number." },
+        },
+      },
       email_address: DataTypes.STRING,
       password: DataTypes.STRING,
-      profile_pic_url: DataTypes.STRING,
+      profile_pic_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { notNull: { msg: "Please upload a valid photo." } },
+      },
     },
     {
       sequelize,
