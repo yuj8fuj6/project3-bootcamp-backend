@@ -107,10 +107,77 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.createTable("course_index", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      course_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "course",
+          key: "id",
+        },
+      },
+      index_code: {
+        type: Sequelize.INTEGER,
+      },
+      type: {
+        type: Sequelize.STRING,
+      },
+      group: {
+        type: Sequelize.STRING,
+      },
+      day: {
+        type: Sequelize.STRING,
+      },
+      start_time: {
+        type: Sequelize.TIME,
+      },
+      end_time: {
+        type: Sequelize.TIME,
+      },
+      duration: {
+        type: Sequelize.REAL,
+      },
+      vacancy: {
+        type: Sequelize.INTEGER,
+      },
+      location: {
+        type: Sequelize.STRING,
+      },
+    });
+
+    await queryInterface.createTable("prerequisite", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      course_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "course",
+          key: "id",
+        },
+      },
+      prerequisite_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "course",
+          key: "id",
+        },
+      }
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("students");
     await queryInterface.dropTable("professors");
     await queryInterface.dropTable("admins");
+    await queryInterface.dropTable("prerequisite");
+    await queryInterface.dropTable("course_index");
   },
 };
