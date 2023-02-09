@@ -3,7 +3,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Prerequisite extends Model {
+  class Course_Index extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.course);
     }
   }
-  Prerequisite.init(
+  Course_Index.init(
     {
       course_id: {
         type: DataTypes.INTEGER,
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       end_time: DataTypes.TIME,
       duration: DataTypes.FLOAT, //Duration is in Hrs, possible for 1.5hrs
       vacanccy: DataTypes.INTEGER,
-      location: DataTypes.STRING //Later change to id if time permits
+      location: DataTypes.STRING, //Later change to id if time permits
     },
     {
       sequelize,
@@ -35,5 +35,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return Prerequisite;
+  return Course_Index;
 };

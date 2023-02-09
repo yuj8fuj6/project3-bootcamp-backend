@@ -40,7 +40,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("courses", {
+    await queryInterface.createTable("course", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -49,9 +49,11 @@ module.exports = {
       },
       college: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       school: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       course_code: {
         type: Sequelize.STRING,
@@ -59,12 +61,15 @@ module.exports = {
       },
       academic_unit: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       course_type: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       course_name: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
     });
   },
