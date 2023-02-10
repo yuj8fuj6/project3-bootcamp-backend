@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.user);
+      this.belongsToMany(models.forum, {through:"adminForums"}); 
     }
   }
   Admin.init(
