@@ -71,9 +71,46 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.createTable("post_upvotes", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      upvote: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
+      post_id: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: "posts",
+          key: "id",
+        },
+      },
+      student_id: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: "students",
+          key: "id",
+        },
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("admin_forums");
     await queryInterface.dropTable("posts");
+    await queryInterface.dropTable("post_upvotes");
   },
 };
