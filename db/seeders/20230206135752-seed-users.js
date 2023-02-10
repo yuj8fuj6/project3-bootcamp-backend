@@ -11,7 +11,7 @@ module.exports = {
           last_name: "Bay",
           phone_number: 64790829,
           email_address: "krista.rau@ntu.edu.sg",
-          password: "7a5f83db",
+          password: "7a5f83db!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Bay%20Hao%20Ming.jpg?alt=media&token=e5b4f716-31e8-4a64-9e79-a14d757e37b3",
           created_at: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
           last_name: "Fung",
           phone_number: 81680481,
           email_address: "lindsay13@ntu.edu.sg",
-          password: "fc9d2ccc",
+          password: "fc9d2ccc!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Fung%20Jia%20Jun.jpg?alt=media&token=783a49b0-05a3-454d-8edf-99a5dcd72a4f",
           created_at: new Date(),
@@ -33,7 +33,7 @@ module.exports = {
           last_name: "Law",
           phone_number: 65369419,
           email_address: "trent.hoppe@ntu.edu.sg",
-          password: "af2d1e07",
+          password: "af2d1e07!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Law%20Zi%20Rui.jpg?alt=media&token=87791f29-5c3a-4a55-ba9e-2b927e6a7830",
           created_at: new Date(),
@@ -44,7 +44,7 @@ module.exports = {
           last_name: "Beh",
           phone_number: 65053440,
           email_address: "marta.wilderman@ntu.edu.sg",
-          password: "c76ccfc9",
+          password: "c76ccfc9!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Beh%20Jun%20De.jpg?alt=media&token=8f322807-0ec2-49ac-b28b-4449bcf724b1",
           created_at: new Date(),
@@ -55,7 +55,7 @@ module.exports = {
           last_name: "Qian",
           phone_number: 65369587,
           email_address: "lorena.simonis@ntu.edu.sg",
-          password: "906474c4",
+          password: "906474c4!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Qian%20Hui%20Wen.jpg?alt=media&token=09200ec9-c0c5-4d35-b9a1-26a7305a1122",
           created_at: new Date(),
@@ -66,7 +66,7 @@ module.exports = {
           last_name: "Huang",
           phone_number: 94871773,
           email_address: "collin.auer@ntu.edu.sg",
-          password: "518f45f8",
+          password: "518f45f8!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Qian%20Hui%20Wen.jpg?alt=media&token=09200ec9-c0c5-4d35-b9a1-26a7305a1122",
           created_at: new Date(),
@@ -77,7 +77,7 @@ module.exports = {
           last_name: "Ng",
           phone_number: 92937134,
           email_address: "bmckenzie@ntu.edu.sg",
-          password: "e9d0b712",
+          password: "e9d0b712!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Ng%20Kah%20Hui.jpg?alt=media&token=afbcd40c-eb90-475d-8bf1-1dc2ac7bedd0",
           created_at: new Date(),
@@ -88,7 +88,7 @@ module.exports = {
           last_name: "Teoh",
           phone_number: 94543117,
           email_address: "gillian.mitchell@ntu.edu.sg",
-          password: "a3a972f1",
+          password: "a3a972f1!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Teoh%20Xin%20Yi.jpg?alt=media&token=412306ae-f1e6-4f4f-b73c-37c546492655",
           created_at: new Date(),
@@ -99,7 +99,7 @@ module.exports = {
           last_name: "Choo",
           phone_number: 81014361,
           email_address: "jamie74@ntu.edu.sg",
-          password: "2efa9cdd",
+          password: "2efa9cdd!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Choo%20Jia%20Ling.jpg?alt=media&token=f2620000-d6ff-48df-ab4c-56078e5b7afb",
           created_at: new Date(),
@@ -110,7 +110,7 @@ module.exports = {
           last_name: "Tong",
           phone_number: 60456290,
           email_address: "florida07@ntu.edu.sg",
-          password: "2fef60ab",
+          password: "2fef60ab!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tong%20Xin%20En.jpg?alt=media&token=36d13827-b028-44da-a445-891fef8316e3",
           created_at: new Date(),
@@ -121,7 +121,7 @@ module.exports = {
           last_name: "Du",
           phone_number: 66721361,
           email_address: "murazik.jerel@ntu.edu.sg",
-          password: "c40b6842",
+          password: "c40b6842!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Du%20Yi%20Ling.jpg?alt=media&token=13fb0d26-0566-45e1-b8ed-95041672c2b1",
           created_at: new Date(),
@@ -132,7 +132,7 @@ module.exports = {
           last_name: "Tee",
           phone_number: 62425147,
           email_address: "jamison07@ntu.edu.sg",
-          password: "jamison07",
+          password: "jamison07!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tee%20Hui%20Shan.jpg?alt=media&token=02509407-be7c-4eb9-b277-dfd93e000ed4",
           created_at: new Date(),
@@ -143,7 +143,7 @@ module.exports = {
           last_name: "Rahman",
           phone_number: 86809663,
           email_address: "sschultz@ntu.edu.sg",
-          password: "b368e77f",
+          password: "b368e77f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Abdul%20Rahman.jpg?alt=media&token=a0f89cbe-2264-4526-b670-76aec19930ed",
           created_at: new Date(),
@@ -154,7 +154,7 @@ module.exports = {
           last_name: "Kang",
           phone_number: 67334291,
           email_address: "elvis.kuhic@ntu.edu.sg",
-          password: "b54cf898",
+          password: "b54cf898!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Kang%20Jia%20Le.jpg?alt=media&token=ed7eb629-904b-47bc-a666-f69984ccb6ad",
           created_at: new Date(),
@@ -165,7 +165,7 @@ module.exports = {
           last_name: "Tee",
           phone_number: 97257593,
           email_address: "gaylord.riley@ntu.edu.sg",
-          password: "0b687bd7",
+          password: "0b687bd7!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tee%20Jia%20Jia.jpg?alt=media&token=b1b60162-b83f-4f0e-ab3c-269bb9acf906",
           created_at: new Date(),
@@ -176,7 +176,7 @@ module.exports = {
           last_name: "How",
           phone_number: 98989385,
           email_address: "elza41@ntu.edu.sg",
-          password: "6fa93243",
+          password: "6fa93243!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/How%20Shu%20Qi.jpg?alt=media&token=99177d14-5df4-4ed3-a64c-47309c6298e3",
           created_at: new Date(),
@@ -187,7 +187,7 @@ module.exports = {
           last_name: "Koh",
           phone_number: 87637164,
           email_address: "cthiel@ntu.edu.sg",
-          password: "018d1330",
+          password: "018d1330!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Koh%20Hui%20Shan.jpg?alt=media&token=32f5e7b3-1e27-40a6-af37-3224506cd558",
           created_at: new Date(),
@@ -198,7 +198,7 @@ module.exports = {
           last_name: "Fan",
           phone_number: 86910450,
           email_address: "afriesen@ntu.edu.sg",
-          password: "1d74085",
+          password: "1d74085!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Fan%20De%20Kang.jpg?alt=media&token=882f19bb-7712-44a5-96cb-1f7fc84ac850",
           created_at: new Date(),
@@ -209,7 +209,7 @@ module.exports = {
           last_name: "Low",
           phone_number: 98384972,
           email_address: "vbraun@ntu.edu.sg",
-          password: "8553ae7f",
+          password: "8553ae7f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Low%20Zhi%20Hui.jpg?alt=media&token=e7780a0b-7aff-464a-b207-03909f8287d5",
           created_at: new Date(),
@@ -220,7 +220,7 @@ module.exports = {
           last_name: "Tang",
           phone_number: 65596733,
           email_address: "carlee38@ntu.edu.sg",
-          password: "2cbd9a21",
+          password: "2cbd9a21!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tang%20Jia%20Yi.jpg?alt=media&token=f3e063d8-4293-44d7-a022-adf998fd8ef4",
           created_at: new Date(),
@@ -231,7 +231,7 @@ module.exports = {
           last_name: "Fong",
           phone_number: 69180083,
           email_address: "dgrant@ntu.edu.sg",
-          password: "cc550472",
+          password: "cc550472!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Fong%20Zi%20Rui.jpg?alt=media&token=8a053760-be82-4be1-80de-8580028059f2",
           created_at: new Date(),
@@ -242,7 +242,7 @@ module.exports = {
           last_name: "Du",
           phone_number: 92662477,
           email_address: "ewillms@ntu.edu.sg",
-          password: "9f5eaedf",
+          password: "9f5eaedf!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Du%20Jia%20Qi.jpg?alt=media&token=ed62fe82-2f80-4ae7-a6b9-dd8d79a39859",
           created_at: new Date(),
@@ -253,7 +253,7 @@ module.exports = {
           last_name: "Ng",
           phone_number: 65018211,
           email_address: "fermin97@ntu.edu.sg",
-          password: "6ab34f21",
+          password: "6ab34f21!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Ng%20Xuan%20Hui.jpg?alt=media&token=d2caabd4-967c-4568-97bb-ac30b2190bd0",
           created_at: new Date(),
@@ -263,8 +263,8 @@ module.exports = {
           first_name: "Min Hui",
           last_name: "Pan",
           phone_number: 81599623,
-          email_address: "elise24@ntu.edu.sg",
-          password: "3dd10e2c",
+          email_address: "minhui@ntu.edu.sg",
+          password: "3dd10e2c!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Pan%20Min%20Hui.jpg?alt=media&token=a3e3c9a8-249c-4379-a3ed-8ec841d7b312",
           created_at: new Date(),
@@ -274,8 +274,8 @@ module.exports = {
           first_name: "Zhi Xin",
           last_name: "Zhuang",
           phone_number: 90559524,
-          email_address: "elise24@ntu.edu.sg",
-          password: "650282fe",
+          email_address: "zhixin@ntu.edu.sg",
+          password: "650282fe!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Zhuang%20Zhi%20Xin.jpg?alt=media&token=a659351a-df1d-48b5-8cc4-bf465fb53b80",
           created_at: new Date(),
@@ -286,7 +286,7 @@ module.exports = {
           last_name: "Goh",
           phone_number: 98561796,
           email_address: "scottie50@ntu.edu.sg",
-          password: "be072c5f",
+          password: "be072c5f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Goh%20Zhi%20xin.jpg?alt=media&token=5acefc5a-f356-415e-8c5f-ded159d45a4f",
           created_at: new Date(),
@@ -297,7 +297,7 @@ module.exports = {
           last_name: "How",
           phone_number: 83855753,
           email_address: "yhettinger@ntu.edu.sg",
-          password: "253c6f8f",
+          password: "253c6f8f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/How%20Hui%20Wen.jpg?alt=media&token=db90a3fa-51e8-4c12-b097-fa38a3cf347e",
           created_at: new Date(),
@@ -308,7 +308,7 @@ module.exports = {
           last_name: "Sim",
           phone_number: 81908607,
           email_address: "taryn.purdy@ntu.edu.sg",
-          password: "bc7298e4",
+          password: "bc7298e4!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Sim%20Zhi%20Xin.jpg?alt=media&token=eb97c6cd-0198-44b2-9711-2fce576d95c4",
           created_at: new Date(),
@@ -319,7 +319,7 @@ module.exports = {
           last_name: "Bay",
           phone_number: 88976234,
           email_address: "bayjiaeng@ntu.edu.sg",
-          password: "049a46fc",
+          password: "049a46fc!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Bay%20Jia%20Sheng.jpg?alt=media&token=31bacea6-6a5e-4c41-a0a0-b8a3c77de9e5",
           created_at: new Date(),
@@ -330,7 +330,7 @@ module.exports = {
           last_name: "Bay",
           phone_number: 68181445,
           email_address: "bayjung@ntu.edu.sg",
-          password: "33a1aa92",
+          password: "33a1aa92!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Bay%20Jun%20Ming.jpg?alt=media&token=7d75a1c8-1b91-4dcf-b0f9-ba0d69d236e0",
           created_at: new Date(),
@@ -341,7 +341,7 @@ module.exports = {
           last_name: "Lew",
           phone_number: 62631339,
           email_address: "lewshuhui@ntu.edu.sg",
-          password: "10533025",
+          password: "a0b33025!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Lew%20Shu%20Hui.jpg?alt=media&token=039368b3-ca1f-48ce-93c8-76931c8c6436",
           created_at: new Date(),
@@ -352,7 +352,7 @@ module.exports = {
           last_name: "Su",
           phone_number: 64103329,
           email_address: "suyonuan@ntu.edu.sg",
-          password: "920b0191",
+          password: "920b0191!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Su%20Yong%20Quan.jpg?alt=media&token=439c2205-228c-45ba-a0bf-346573d116b4",
           created_at: new Date(),
@@ -363,7 +363,7 @@ module.exports = {
           last_name: "Low",
           phone_number: 63126312,
           email_address: "lowruien@ntu.edu.sg",
-          password: "9c41a8f4",
+          password: "9c41a8f4!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Low%20Rui%20En.jpg?alt=media&token=5d251399-5a44-4621-965f-e965cb8320df",
           created_at: new Date(),
@@ -374,7 +374,7 @@ module.exports = {
           last_name: "Yeh",
           phone_number: 94903302,
           email_address: "yehxinen@ntu.edu.sg",
-          password: "4feff748",
+          password: "4feff748!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Yeh%20Xin%20En.jpg?alt=media&token=5d933728-03ff-42b8-98eb-e98b05754135",
           created_at: new Date(),
@@ -385,7 +385,7 @@ module.exports = {
           last_name: "Zhuo",
           phone_number: 62056996,
           email_address: "zhuokain@ntu.edu.sg",
-          password: "97856f41",
+          password: "97856f41!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Zhuo%20Kai%20Xin.jpg?alt=media&token=34ae7811-9330-467d-8cd4-7cf9670dd38e",
           created_at: new Date(),
@@ -396,7 +396,7 @@ module.exports = {
           last_name: "Low",
           phone_number: 68895914,
           email_address: "lowhuiwen@ntu.edu.sg",
-          password: "70b7f517",
+          password: "70b7f517!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Low%20Hui%20Wen.jpg?alt=media&token=f6147dc7-b448-4154-9be5-a87ea3e32ee1",
           created_at: new Date(),
@@ -407,7 +407,7 @@ module.exports = {
           last_name: "Shen",
           phone_number: 81765359,
           email_address: "shenxing@ntu.edu.sg",
-          password: "ca346bdf",
+          password: "ca346bdf!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Shen%20Xi%20Ling.jpg?alt=media&token=16c93b92-da25-4e7d-8e5c-605bc91c3b07",
           created_at: new Date(),
@@ -418,7 +418,7 @@ module.exports = {
           last_name: "Yeh",
           phone_number: 84800811,
           email_address: "yehsuqi@ntu.edu.sg",
-          password: "4b37115d",
+          password: "4b37115d!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Yeh%20Shu%20Qi.jpg?alt=media&token=7414bb58-3682-4ea4-9b9f-d23ea6c437b2",
           created_at: new Date(),
@@ -429,7 +429,7 @@ module.exports = {
           last_name: "Du",
           phone_number: 64876482,
           email_address: "duxuanng@ntu.edu.sg",
-          password: "8e99a3dd",
+          password: "8e99a3dd!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Du%20Xuan%20Ying.jpg?alt=media&token=e0f73dd4-2bb4-452b-a9fa-eb5b6d73811c",
           created_at: new Date(),
@@ -440,7 +440,7 @@ module.exports = {
           last_name: "He",
           phone_number: 63380329,
           email_address: "heenui@ntu.edu.sg",
-          password: "e5eacfdc",
+          password: "e5eacfdc!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/He%20En%20Hui.jpg?alt=media&token=8f7d83aa-a44b-42bf-bced-989e055a78f4",
           created_at: new Date(),
@@ -451,7 +451,7 @@ module.exports = {
           last_name: "Yeo",
           phone_number: 98649305,
           email_address: "yeojigan@ntu.edu.sg",
-          password: "5f7be6c6",
+          password: "5f7be6c6!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Yeo%20Jing%20An.jpg?alt=media&token=7040326b-0bfe-46c2-8d2a-b45e01e35c5b",
           created_at: new Date(),
@@ -462,7 +462,7 @@ module.exports = {
           last_name: "Fang",
           phone_number: 93581158,
           email_address: "fangyde@ntu.edu.sg",
-          password: "c1108355",
+          password: "c1108355!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Fang%20Yi%20De.jpg?alt=media&token=db50d3f9-9ab7-4694-abaf-8f671245b4e5",
           created_at: new Date(),
@@ -473,7 +473,7 @@ module.exports = {
           last_name: "Zeng",
           phone_number: 88178380,
           email_address: "zenglihui@ntu.edu.sg",
-          password: "13234e1f",
+          password: "13234e1f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Zeng%20Lin%20Hui.jpg?alt=media&token=7422a0a4-28be-4685-b919-66f946e4eeeb",
           created_at: new Date(),
@@ -484,7 +484,7 @@ module.exports = {
           last_name: "Lam",
           phone_number: 61383514,
           email_address: "lammingde@ntu.edu.sg",
-          password: "345a78fa",
+          password: "345a78fa!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Lam%20Ming%20De.jpg?alt=media&token=ee47da56-863e-4476-99f9-229229b93983",
           created_at: new Date(),
@@ -495,7 +495,7 @@ module.exports = {
           last_name: "Phoon",
           phone_number: 69393132,
           email_address: "phoonjng@ntu.edu.sg",
-          password: "51f9e2c9",
+          password: "51f9e2c9!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Phoon%20Jia%20Sheng.jpg?alt=media&token=813fd0a2-57d7-424c-87f6-333338a873ad",
           created_at: new Date(),
@@ -506,7 +506,7 @@ module.exports = {
           last_name: "Sheng",
           phone_number: 61779093,
           email_address: "shengng@ntu.edu.sg",
-          password: "bb5c1cbf",
+          password: "bb5c1cbf!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Sheng%20Xuan%20Ying.jpg?alt=media&token=33d46b72-3e5c-4408-af9d-82a42c92b6fe",
           created_at: new Date(),
@@ -517,7 +517,7 @@ module.exports = {
           last_name: "Pun",
           phone_number: 98155816,
           email_address: "punshhui@ntu.edu.sg",
-          password: "3111e07d",
+          password: "3111e07d!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Pun%20Shu%20Hui.jpg?alt=media&token=9e66677c-2b12-4136-b830-88309c322f0f",
           created_at: new Date(),
@@ -528,7 +528,7 @@ module.exports = {
           last_name: "Goh",
           phone_number: 84312377,
           email_address: "gohyde@ntu.edu.sg",
-          password: "2fdd31ef",
+          password: "2fdd31ef!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Goh%20Yi%20De.jpg?alt=media&token=83330ee2-8737-4335-8dd4-2f29423e0cd9",
           created_at: new Date(),
@@ -539,7 +539,7 @@ module.exports = {
           last_name: "Tee",
           phone_number: 65358938,
           email_address: "teesqi@ntu.edu.sg",
-          password: "68d0dab6",
+          password: "68d0dab6!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tee%20Shu%20Qi.jpg?alt=media&token=8d02a794-1c15-4371-a27a-706aebd5eda0",
           created_at: new Date(),
@@ -550,7 +550,7 @@ module.exports = {
           last_name: "Ding",
           phone_number: 62431669,
           email_address: "dingkng@ntu.edu.sg",
-          password: "e3622a8c",
+          password: "e3622a8c!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Ding%20Kai%20Ming.jpg?alt=media&token=1d631026-2774-448b-b0c1-62384b4fa1f3",
           created_at: new Date(),
@@ -561,7 +561,7 @@ module.exports = {
           last_name: "Tong",
           phone_number: 69544647,
           email_address: "tongsiyu@ntu.edu.sg",
-          password: "46830c4c",
+          password: "46830c4c!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Tong%20Sing%20Yu.jpg?alt=media&token=2899ed55-1bd4-49c5-94a0-cde1d3c4b353",
           created_at: new Date(),
@@ -572,7 +572,7 @@ module.exports = {
           last_name: "Yang",
           phone_number: 85137140,
           email_address: "yangjui@ntu.edu.sg",
-          password: "7d4433e9",
+          password: "7d4433e9!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Yang%20Jun%20Rui.jpg?alt=media&token=b76d6aeb-7e0d-4775-a555-81dc70b78631",
           created_at: new Date(),
@@ -583,7 +583,7 @@ module.exports = {
           last_name: "Teo",
           phone_number: 97267634,
           email_address: "teoshui@ntu.edu.sg",
-          password: "6ef6b5f8",
+          password: "6ef6b5f8!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Teo%20Si%20Hui.jpg?alt=media&token=d2bb59e8-c3b7-43b6-80cd-1957766f0f87",
           created_at: new Date(),
@@ -594,7 +594,7 @@ module.exports = {
           last_name: "Su",
           phone_number: 93220827,
           email_address: "sujuning@ntu.edu.sg",
-          password: "a2c94f6f",
+          password: "a2c94f6f!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Su%20Jun%20Ming.jpg?alt=media&token=3f3846fc-8002-4e4d-b502-3f9c11cdf2ee",
           created_at: new Date(),
@@ -605,7 +605,7 @@ module.exports = {
           last_name: "De",
           phone_number: 61349222,
           email_address: "hongjade@ntu.edu.sg",
-          password: "90a80f5b",
+          password: "90a80f5b!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/De%20Hong%20Jia.jpg?alt=media&token=c9f0c146-2121-433d-ac37-35f3d51297ae",
           created_at: new Date(),
@@ -616,7 +616,7 @@ module.exports = {
           last_name: "Lai",
           phone_number: 97518843,
           email_address: "laiweile@ntu.edu.sg",
-          password: "5b8c4a22",
+          password: "5b8c4a22!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Lai%20Wei%20Le.jpg?alt=media&token=5daa5e93-b602-443b-abb2-11b19885633b",
           created_at: new Date(),
@@ -627,7 +627,7 @@ module.exports = {
           last_name: "Liu",
           phone_number: 67000130,
           email_address: "liuzhhui@ntu.edu.sg",
-          password: "57daf584",
+          password: "57daf584!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Liu%20Zhi%20Hui.jpg?alt=media&token=d3be4351-adcc-47f8-b994-e796b9b1e3a0",
           created_at: new Date(),
@@ -638,7 +638,7 @@ module.exports = {
           last_name: "How",
           phone_number: 87755771,
           email_address: "howjqi@ntu.edu.sg",
-          password: "fbe544e9",
+          password: "fbe544e9!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/How%20Jia%20Qi.jpg?alt=media&token=df55a477-b0b4-45a3-8600-cbd8c6be6f13",
           created_at: new Date(),
@@ -649,7 +649,7 @@ module.exports = {
           last_name: "Fang",
           phone_number: 62745857,
           email_address: "fangjeng@ntu.edu.sg",
-          password: "932759d2",
+          password: "932759d2!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Fang%20Jun%20Feng.jpg?alt=media&token=98f0e408-99ff-4894-b110-f1116640214a",
           created_at: new Date(),
@@ -660,7 +660,7 @@ module.exports = {
           last_name: "Chen",
           phone_number: 88759277,
           email_address: "chenying@ntu.edu.sg",
-          password: "8ac7b7e1",
+          password: "8ac7b7e1!",
           profile_pic_url:
             "https://firebasestorage.googleapis.com/v0/b/starswar-project3.appspot.com/o/Chen%20Yi%20Ming.jpg?alt=media&token=e5057c56-3897-4fca-9d39-42b3f0432420",
           created_at: new Date(),

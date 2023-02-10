@@ -9,8 +9,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.literal("gen_random_uuid()"), //changed from Sequeliz.literal to UUID as gen_random_uuid DNE
+        type: Sequelize.UUID,
+        // defaultValue: Sequelize.literal("gen_random_uuid()"), //changed from Sequeliz.literal to UUID as gen_random_uuid DNE
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -56,8 +56,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.literal("gen_random_uuid()"),
+        type: Sequelize.UUID,
+        // defaultValue: Sequelize.literal("gen_random_uuid()"),
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -85,8 +85,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.literal("gen_random_uuid()"),
+        type: Sequelize.UUID,
+        // defaultValue: Sequelize.literal("gen_random_uuid()"),
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -145,7 +145,8 @@ module.exports = {
         type: Sequelize.TIME,
         allowNull: false,
       },
-      duration: { //Duration is in hours, it is possible for 1.5hrs
+      duration: {
+        //Duration is in hours, it is possible for 1.5hrs
         type: Sequelize.REAL,
         allowNull: false,
       },
@@ -179,7 +180,40 @@ module.exports = {
           model: "course",
           key: "id",
         },
-      }
+      },
+    });
+
+    await queryInterface.createTable("forums", {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal("gen_random_uuid()"),
+      },
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      description: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      course_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "course",
+          key: "id",
+        },
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
@@ -188,5 +222,6 @@ module.exports = {
     await queryInterface.dropTable("admins");
     await queryInterface.dropTable("prerequisite");
     await queryInterface.dropTable("course_index");
+    await queryInterface.dropTable("forums");
   },
 };
