@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.user);
-      this.belongsToMany(models.forum, {through:"adminForums"}); 
+      this.belongsToMany(models.forum, { through: "adminForums" });
     }
   }
   Admin.init(
     {
       user_id: {
         type: DataTypes.INTEGER,
-        references: { model: "users", key: "id" },
+        references: { model: "user", key: "id" },
       },
       admin_permission: DataTypes.BOOLEAN,
     },
