@@ -10,10 +10,10 @@ const UsersController = require("./controllers/usersController");
 
 // importing DB
 const db = require("./db/models/index");
-const { user } = db;
+const { user, student } = db;
 
 // initializing Controllers
-const usersController = new UsersController(user);
+const usersController = new UsersController(user, student);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
