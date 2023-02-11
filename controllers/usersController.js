@@ -1,9 +1,11 @@
 const BaseController = require("./baseController");
 
 class UsersController extends BaseController {
-  constructor(model, studentModel) {
+  constructor(model, studentModel, professorModel, adminModel) {
     super(model);
     this.studentModel = studentModel;
+    this.professorModel = professorModel;
+    this.adminModel = adminModel;
   }
 
   // Retrieve specific sighting
@@ -11,7 +13,11 @@ class UsersController extends BaseController {
     const { userId } = req.params;
     try {
       const user = await this.model.findByPk(userId, {
-        include: this.studentModel,
+        include: [
+          { model: this.studentModel },
+          { model: this.professorModel },
+          { model: this.adminModel },
+        ],
       });
       return res.json(user);
     } catch (err) {

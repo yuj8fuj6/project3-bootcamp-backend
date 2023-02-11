@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasOne(models.student);
       this.hasOne(models.professor);
+      this.hasOne(models.admin);
     }
   }
   User.init(
