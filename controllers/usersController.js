@@ -10,9 +10,10 @@ class UsersController extends BaseController {
 
   // Retrieve specific sighting
   async getOne(req, res) {
-    const { userId } = req.params;
+    const { email } = req.params;
     try {
-      const user = await this.model.findByPk(userId, {
+      const user = await this.model.findOne({
+        where: { email_address: email },
         include: [
           { model: this.studentModel },
           { model: this.professorModel },
