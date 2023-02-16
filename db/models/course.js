@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.prerequisite);
+      this.hasMany(models.courseIndex);
       this.hasOne(models.forum);
     }
   }
@@ -25,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "course",
       underscored: true,
+      timestamps: false,
     },
   );
   return Course;
