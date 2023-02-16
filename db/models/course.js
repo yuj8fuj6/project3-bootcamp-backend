@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.prerequisite);
       this.hasOne(models.forum);
+      this.belongsToMany(models.student, { through: "student_course" });
     }
   }
   Course.init(

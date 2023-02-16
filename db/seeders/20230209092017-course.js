@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("course", [
+   await queryInterface.bulkInsert("courses", [
   {
     college: "Engineering",
     school: "EEE",

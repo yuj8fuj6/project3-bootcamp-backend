@@ -107,7 +107,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable("course_index", {
+    await queryInterface.createTable("course_indexs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -160,7 +160,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("prerequisite", {
+    await queryInterface.createTable("prerequisites", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -220,8 +220,8 @@ module.exports = {
     await queryInterface.dropTable("students");
     await queryInterface.dropTable("professors");
     await queryInterface.dropTable("admins");
-    await queryInterface.dropTable("prerequisite");
-    await queryInterface.dropTable("course_index");
+    await queryInterface.dropTable("prerequisites");
+    await queryInterface.dropTable("course_indexs");
     await queryInterface.dropTable("forums");
   },
 };

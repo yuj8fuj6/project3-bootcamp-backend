@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("course_index", [
+   await queryInterface.bulkInsert("course_indexs", [
      {
        course_id: 1,
        index_code: 320641,
@@ -1787,6 +1787,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("course_index", null, {})
+    await queryInterface.bulkDelete("course_indexs", null, {})
   }
 };
