@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("prerequisite", [
+   await queryInterface.bulkInsert("prerequisites", [
      {
        course_id: "4",
        prerequisite_id: "3",
@@ -103,6 +103,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("prerequisite", null, {})
+    await queryInterface.bulkDelete("prerequisites", null, {})
   }
 };
