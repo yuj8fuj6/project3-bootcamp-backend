@@ -124,7 +124,7 @@ module.exports = {
       course_index_id: {
         type: DataTypes.INTEGER,
         references: {
-          model: "course_index",
+          model: "course_indices",
           key: "id",
         },
       },
@@ -146,7 +146,7 @@ module.exports = {
       course_id: {
         type: DataTypes.INTEGER,
         references: {
-          model: "course",
+          model: "courses",
           key: "id",
         },
       },

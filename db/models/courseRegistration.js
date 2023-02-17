@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Define separate 1-M relationships with both Person and Personality models
       // to enable them to query junction model
-      this.belongsTo(models.course_index);
+      this.belongsTo(models.course_indice);
       this.belongsTo(models.student);
     }
   }

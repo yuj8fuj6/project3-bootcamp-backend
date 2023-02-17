@@ -3,7 +3,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class CourseIndex extends Model {
+  class CourseIndices extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.course);
-      this.belongsToMany(models.student, { through: "course_registration"});
+      this.belongsToMany(models.student, { through: "course_registration" });
     }
   }
-  CourseIndex.init(
+  CourseIndices.init(
     {
       course_id: {
         type: DataTypes.INTEGER,
@@ -32,10 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "courseIndex",
+      modelName: "course_indice",
       underscored: true,
       timestamps: false,
-    },
+    }
   );
-  return CourseIndex;
+  return CourseIndices;
 };
