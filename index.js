@@ -4,16 +4,20 @@ require("dotenv").config();
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
+const CourseRouter = require("./routers/coursesRouter")
 
 // importing Controllers
 const UsersController = require("./controllers/usersController");
+const CoursesController = require("./controllers/coursesController")
 
 // importing DB
 const db = require("./db/models/index");
-const { user, student, professor, admin } = db;
+const CoursesController = require("./controllers/coursesController");
+const { user, student, professor, admin, course, course_index, course_registration,  } = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
+const courseCotnroller = new CoursesController(student, )
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
