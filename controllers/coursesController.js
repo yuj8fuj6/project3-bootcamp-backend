@@ -1,6 +1,6 @@
 const BaseController = require("./baseController");
 
-class UsersController extends BaseController {
+class CoursesController extends BaseController {
   constructor(model, studentModel, professorModel, adminModel) {
     super(model);
     this.studentModel = studentModel;
@@ -8,7 +8,7 @@ class UsersController extends BaseController {
     this.adminModel = adminModel;
   }
 
-  // Retrieve specific user
+  // Retrieve specific sighting
   async getOne(req, res) {
     const { email } = req.params;
     try {
@@ -25,22 +25,6 @@ class UsersController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
-
-  // Retrieve all users
-  async getAll(req, res) {
-    try {
-      const allUsers = await this.model.findAll({
-        include: [
-          { model: this.studentModel },
-          { model: this.professorModel },
-          { model: this.adminModel },
-        ],
-      });
-      return res.json(allUsers);
-    } catch (err) {
-      return res.status(400).json({ error: true, msg: err });
-    }
-  }
 }
 
-module.exports = UsersController;
+module.exports = CoursesController;
