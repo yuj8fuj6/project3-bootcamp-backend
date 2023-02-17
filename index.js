@@ -69,10 +69,17 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
+  socket.on("join_room", async (data) => {
     socket.join(data);
-    let newRoom = chatroom.create({ room: "123", user_id: 3 });
-    console.log(`User ${socket.id} joined room: ${newRoom}`);
+    console.log(data);
+    const { room, email_address } = data;
+    const joinUser = await user.findOne({
+      where: {
+        email_address,
+      },
+    });
+    let newRoom = chatroom.create({ room, user_id: joinUser.id });
+    console.log(`User ${socket.id}, ${joinUser.id} joined room: ${newRoom}`);
   });
 
   // to see how many users in the chatroom
@@ -96,7 +103,7 @@ io.on("connection", (socket) => {
     try {
       let newMessage = await message.create({
         message: "hello",
-        chatroom_id: "bc55677b-9986-4dbc-b543-faa49769e7bf",
+        chatroom_id: "31a7c42f-59f5-486f-814f-db862793123e",
         author_user_id: 3,
       });
       // emit message into specific chatroom
