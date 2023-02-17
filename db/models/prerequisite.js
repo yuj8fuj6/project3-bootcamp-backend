@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "prerequisite",
       underscored: true,
-    }
+      timestamps: false,
+    },
   );
   return Prerequisite;
 };

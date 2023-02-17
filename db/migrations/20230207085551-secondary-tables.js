@@ -107,7 +107,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable("course_index", {
+    await queryInterface.createTable("course_indices", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -117,7 +117,7 @@ module.exports = {
       course_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "course",
+          model: "courses",
           key: "id",
         },
       },
@@ -160,7 +160,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("prerequisite", {
+    await queryInterface.createTable("prerequisites", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -170,14 +170,14 @@ module.exports = {
       course_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "course",
+          model: "courses",
           key: "id",
         },
       },
       prerequisite_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "course",
+          model: "courses",
           key: "id",
         },
       },
@@ -202,7 +202,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "course",
+          model: "courses",
           key: "id",
         },
       },
@@ -220,8 +220,8 @@ module.exports = {
     await queryInterface.dropTable("students");
     await queryInterface.dropTable("professors");
     await queryInterface.dropTable("admins");
-    await queryInterface.dropTable("prerequisite");
-    await queryInterface.dropTable("course_index");
+    await queryInterface.dropTable("prerequisites");
+    await queryInterface.dropTable("course_indices");
     await queryInterface.dropTable("forums");
   },
 };

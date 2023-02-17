@@ -40,7 +40,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable("course", {
+    await queryInterface.createTable("courses", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -75,6 +75,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("users");
-    await queryInterface.dropTable("course");
+    await queryInterface.dropTable("courses");
   },
 };

@@ -21,6 +21,8 @@ const courseCotnroller = new CoursesController(student, )
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
+const courseRouter = new CoursesRouter(coursesController).routes();
+const forumRouter = new ForumsRouter(forumsController).routes();
 
 const PORT = process.env.PORT;
 const app = express();
@@ -31,7 +33,9 @@ app.use(cors());
 app.use(express.json());
 
 // routers
-app.use("/", userRouter);
+app.use("/users", userRouter);
+app.use("/courses", courseRouter);
+app.use("/forums", forumRouter);
 
 app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
