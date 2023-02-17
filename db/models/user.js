@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.professor);
       this.hasOne(models.admin);
       this.hasMany(models.message, {
-        as: "authorUser",
-        foreignKey: "authorUserId",
+        as: "author",
+        foreignKey: "author_user_id",
       });
     }
   }

@@ -9,9 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.chatroom);
       this.belongsTo(models.user, {
         as: "authorUser",
-        foreignKey: "authorUserId",
+        foreignKey: "author_user_id",
       });
     }
   }
@@ -19,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       message: DataTypes.STRING,
       chatroom_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: "chatroom",
           key: "id",
         },
       },
-      authorUser_id: {
+      author_user_id: {
         type: DataTypes.INTEGER,
         references: {
           model: "user",

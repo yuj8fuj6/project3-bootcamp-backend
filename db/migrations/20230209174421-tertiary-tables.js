@@ -110,7 +110,7 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("admin_forums");
-    await queryInterface.dropTable("posts");
     await queryInterface.dropTable("post_upvotes");
+    await queryInterface.dropTable("posts");
   },
 };

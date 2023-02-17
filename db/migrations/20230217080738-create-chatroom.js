@@ -1,13 +1,16 @@
 "use strict";
+
+const { DataTypes } = require("sequelize");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("chatrooms", {
       id: {
         allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal("gen_random_uuid()"),
       },
       room: {
         type: Sequelize.STRING,
@@ -65,14 +68,14 @@ module.exports = {
     await queryInterface.createTable("messages", {
       id: {
         allowNull: false,
-        // autoIncrement: true,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
       },
       message: {
         type: Sequelize.STRING,
       },
-      authorUser_id: {
+      author_user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "users",
@@ -97,8 +100,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("chatrooms");
     await queryInterface.dropTable("chatroom_users");
     await queryInterface.dropTable("messages");
+    await queryInterface.dropTable("chatrooms");
   },
 };

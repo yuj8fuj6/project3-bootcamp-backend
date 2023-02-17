@@ -28,6 +28,8 @@ const {
   prerequisite,
   post,
   adminForum,
+  message,
+  chatroom,
 } = db;
 
 // initializing Controllers
@@ -69,17 +71,40 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`User ${socket.id} joined room: ${data}`);
+    let newRoom = chatroom.create({ room: "123", user_id: 3 });
+    console.log(`User ${socket.id} joined room: ${newRoom}`);
+  });
+
+  // to see how many users in the chatroom
+  let users = [];
+
+  const addUser = (userId, socketId) => {
+    !users.some((user) => user.userId === userId) &&
+      users.push({ userId, socketId });
+  };
+
+  socket.on("add_user", (userId) => {
+    addUser(userId, socket.id);
+    io.emit("get_users", users);
+    console.log(users);
   });
 
   socket.on("send_message", async (data) => {
     console.log(data);
     // calling createNewMessage from messengerController to add data into database
     // let newMessage = await messengerController.createNewMessage(data);
-    // let newMessage = await message.create(data);
-
-    // emit message into specific chatroom
-    socket.to(data.room).emit("receive_message", data);
+    try {
+      let newMessage = await message.create({
+        message: "hello",
+        chatroom_id: "bc55677b-9986-4dbc-b543-faa49769e7bf",
+        author_user_id: 3,
+      });
+      // emit message into specific chatroom
+      socket.to(data.room).emit("receive_message", newMessage);
+    } catch (error) {
+      console.log("ERROR");
+      console.log(error);
+    }
   });
 
   socket.on("disconnect", () => {
