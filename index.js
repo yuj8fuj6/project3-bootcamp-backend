@@ -32,7 +32,7 @@ const usersController = new UsersController(user, student, professor, admin);
 const coursesController = new CoursesController(
   course,
   courseIndex,
-  prerequisite,
+  prerequisite
 );
 const forumsController = new ForumsController(forum, course, post, adminForum);
 
