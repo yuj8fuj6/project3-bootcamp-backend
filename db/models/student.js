@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.post);
       this.hasMany(models.post_upvote);
       this.belongsToMany(models.course_indice, {
-        through: "course_registration",
+        through: "course_registrations",
       });
-      this.belongsToMany(models.course, { through: "student_course" });
+      this.belongsToMany(models.course, { through: "student_courses" });
     }
   }
   Student.init(

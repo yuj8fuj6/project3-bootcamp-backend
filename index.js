@@ -14,11 +14,26 @@ const ForumsController = require("./controllers/forumsController")
 
 // importing DB
 const db = require("./db/models/index");
-const { user, student, professor, admin, course, course_indice, course_registration} = db;
+const {
+  user,
+  student,
+  professor,
+  admin,
+  course,
+  course_indice,
+  course_registration,
+  student_course,
+} = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-const courseController = new CoursesController(course, course_indice, course_registration)
+const courseController = new CoursesController(
+  student,
+  course,
+  course_indice,
+  course_registration,
+  student_course
+);
 const forumsController = new ForumsController()
 
 // initializing Routers

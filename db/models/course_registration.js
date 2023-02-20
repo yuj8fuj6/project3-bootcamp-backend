@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       student_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: "student",
           key: "id",
@@ -36,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      intensity: DataTypes.INTEGER,
     },
     {
       sequelize,

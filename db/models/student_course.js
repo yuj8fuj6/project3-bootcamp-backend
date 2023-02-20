@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       student_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: "student",
           key: "id",
@@ -35,13 +35,13 @@ module.exports = (sequelize, DataTypes) => {
           model: "course",
           key: "id",
         },
-      },
-      intensity: DataTypes.INTEGER,
+      }
     },
     {
       sequelize,
       modelName: "student_course",
       underscored: true,
+      timestamps: false
     }
   );
   return Student_course;
