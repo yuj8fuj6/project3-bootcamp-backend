@@ -1,26 +1,34 @@
 const BaseController = require("./baseController");
 
 class CoursesController extends BaseController {
-  constructor(model, studentModel, professorModel, adminModel) {
+  constructor(model, indexModel, courseRegModel) {
     super(model);
-    this.studentModel = studentModel;
-    this.professorModel = professorModel;
-    this.adminModel = adminModel;
+    this.indexModel = indexModel;
+    this.courseRegModel = courseRegModel;
   }
 
   // Retrieve specific sighting
-  async getOne(req, res) {
-    const { email } = req.params;
+  async getCourses(req, res) {
+    const { course_code } = req.params;
     try {
-      const user = await this.model.findOne({
-        where: { email_address: email },
+      const courses = await this.model.findOne({
+        where: { course_code: course_code },
+        include: [{ model: this.indexModel }],
+      });
+      return res.json(courses);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async getAll(req, res) {
+    try {
+      const allUsers = await this.model.findAll({
         include: [
-          { model: this.studentModel },
-          { model: this.professorModel },
-          { model: this.adminModel },
+          { model: this.indexModel },
         ],
       });
-      return res.json(user);
+      return res.json(allUsers);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

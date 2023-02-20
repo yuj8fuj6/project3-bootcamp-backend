@@ -1,5 +1,5 @@
 const cors = require("cors");
-const express = require("express");
+const express = require('express');
 require("dotenv").config();
 
 // importing Routers
@@ -14,11 +14,11 @@ const ForumsController = require("./controllers/forumsController")
 
 // importing DB
 const db = require("./db/models/index");
-const { user, student, professor, admin, courses, course_indices, course_registration} = db;
+const { user, student, professor, admin, course, course_indice, course_registration} = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-const courseController = new CoursesController(student)
+const courseController = new CoursesController(course, course_indice, course_registration)
 const forumsController = new ForumsController()
 
 // initializing Routers
