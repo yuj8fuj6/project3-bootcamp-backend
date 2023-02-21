@@ -13,9 +13,10 @@ class CoursesController extends BaseController {
   // Retrieve specific sighting
   async getCourses(req, res) {
     const { course_code } = req.params;
+    let course_codes = course_code.split("+")
     try {
-      const courses = await this.course.findOne({
-        where: { course_code: course_code },
+      const courses = await this.course.findAll({
+        where: { course_code: course_codes },
         include: [{ model: this.indexModel }],
       });
       return res.json(courses);
