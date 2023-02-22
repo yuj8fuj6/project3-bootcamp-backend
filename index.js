@@ -145,6 +145,7 @@ io.on("connection", (socket) => {
         message: data.message,
         author_user_id: authorUser.id,
         chatroom_id: roomId.id,
+        time: data.time,
       });
       console.log("NEW MESSAGE", newMessage);
     } catch (error) {

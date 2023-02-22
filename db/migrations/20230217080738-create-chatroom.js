@@ -88,6 +88,9 @@ module.exports = {
           key: "id",
         },
       },
+      time: {
+        type: DataTypes.TIME,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
