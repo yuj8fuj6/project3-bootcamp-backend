@@ -78,14 +78,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", async (data) => {
-    const { currentMessage, room, email_address } = data;
-    const authorUser = await user.findOne({
-      where: {
-        email_address,
-      },
-    });
-    console.log(`${authorUser} sent ${currentMessage} in room ${room}`);
-    socket.to(room).emit("receive_message", data);
+    socket.to(data.room).emit("receive_message", data);
+    console.log(`${data} was sent in room ${data}`);
   });
 
   socket.on("disconnect", () => {
