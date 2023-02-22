@@ -65,6 +65,24 @@ class ForumsController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+
+  async addOnePost(req, res) {
+    const { student_id, content, forum_id } = req.body;
+    try {
+      const newPost = await this.postModel.create({
+        student_id: student_id,
+        content: content,
+        forum_id: forum_id,
+      });
+      console.log("created new post");
+      const allForums = await this.model.findAll({
+        include: [{ model: this.courseModel }, { model: this.postModel }],
+      });
+      return res.json(allForums);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 }
 
 module.exports = ForumsController;

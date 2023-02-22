@@ -16,10 +16,8 @@ class ForumsRouter {
       "/filteredCourses",
       this.controller.filterCourses.bind(this.controller),
     );
-    router.post(
-      "/newForum", 
-      this.controller.addOne.bind(this.controller), 
-    )
+    router.post("/newForum", this.controller.addOne.bind(this.controller));
+    router.post("/newPost", this.controller.addOnePost.bind(this.controller));
     return router;
   }
 }
