@@ -66,8 +66,26 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    console.log(`User with ID ${socket.id} joined room ${data}`);
+  socket.on("join_room", async (data) => {
+    const { room, email_address } = data;
+    socket.join(room);
+    const userJoined = await user.findOne({
+      where: {
+        email_address,
+      },
+    });
+    console.log(`${userJoined} with ID ${socket.id} joined room ${room}`);
+  });
+
+  socket.on("send_message", async (data) => {
+    const { currentMessage, room, email_address } = data;
+    const authorUser = await user.findOne({
+      where: {
+        email_address,
+      },
+    });
+    console.log(`${authorUser} sent ${currentMessage} in room ${room}`);
+    socket.to(room).emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {
