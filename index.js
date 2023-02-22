@@ -66,6 +66,13 @@ const io = new Server(server, {
   },
 });
 
+// NOT WORKING
+// let usersInRoom = [];
+// const addUser = (userId, socketId) => {
+//   !usersInRoom.some((user) => user.userId === userId) &&
+//     usersInRoom.push({ userId, socketId });
+// };
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
@@ -97,6 +104,29 @@ io.on("connection", (socket) => {
       },
     });
     console.log("ROOM", newRoom, "JUNCTION TABLE", chatroomUsers);
+
+    let allMessages = await message.findAll({
+      where: {
+        chatroom_id: roomId.id,
+      },
+      include: [
+        {
+          model: user,
+          as: "authorUser",
+          attributes: ["first_name", "last_name", "profile_pic_url"],
+        },
+      ],
+      order: ["created_at"],
+    });
+    socket.emit("send_chatData", allMessages);
+    console.log("ALL MESSAGES", allMessages);
+
+    // NOT WORKING
+    // socket.on("add_user", (userId) => {
+    //   addUser(userId, socket.id);
+    //   io.emit("get_users", usersInRoom);
+    //   console.log("USERS IN ROOM", usersInRoom);
+    // });
   });
 
   socket.on("send_message", async (data) => {
