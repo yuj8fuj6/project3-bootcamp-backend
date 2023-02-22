@@ -27,6 +27,8 @@ const {
   prerequisite,
   post,
   adminForum,
+  chatroom,
+  chatroom_user,
 } = db;
 
 // initializing Controllers
@@ -74,7 +76,26 @@ io.on("connection", (socket) => {
         email_address,
       },
     });
-    console.log(`${userJoined} with ID ${socket.id} joined room ${room}`);
+    const newRoom = await chatroom.findOrCreate({
+      where: {
+        room,
+        user_id: userJoined.id,
+      },
+    });
+    // To get the id of the room in chatroom.
+    // Without this, I can only get the name of the room
+    const roomId = await chatroom.findOne({
+      where: {
+        room,
+      },
+    });
+    const chatroomUsers = await chatroom_user.findOrCreate({
+      where: {
+        userId: userJoined.id,
+        chatroomId: roomId.id,
+      },
+    });
+    console.log("ROOM", newRoom, "JUNCTION TABLE", chatroomUsers);
   });
 
   socket.on("send_message", async (data) => {
