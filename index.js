@@ -29,6 +29,7 @@ const {
   adminForum,
   chatroom,
   chatroom_user,
+  message,
 } = db;
 
 // initializing Controllers
@@ -99,8 +100,30 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", async (data) => {
+    const authorUser = await user.findOne({
+      where: {
+        email_address: data.sender,
+      },
+    });
+    const roomId = await chatroom.findOne({
+      where: {
+        room: data.room,
+      },
+    });
+    try {
+      let newMessage = await message.create({
+        message: data.message,
+        author_user_id: authorUser.id,
+        chatroom_id: roomId.id,
+      });
+      console.log("NEW MESSAGE", newMessage);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
     socket.to(data.room).emit("receive_message", data);
-    console.log(`${data} was sent in room ${data}`);
+    console.log(data);
+    console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
+    console.log(`${authorUser.id} sent ${roomId.id} in room ${data.room}`);
   });
 
   socket.on("disconnect", () => {
