@@ -83,6 +83,21 @@ class ForumsController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+
+  async deleteOnePost(req, res) {
+    const { postID } = req.body;
+    try {
+      const deletedPost = await this.postModel.findByPk(postID);
+      await deletedPost.destroy();
+      console.log("deleted post");
+      const allForums = await this.model.findAll({
+        include: [{ model: this.courseModel }, { model: this.postModel }],
+      });
+      return res.json(allForums);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 }
 
 module.exports = ForumsController;

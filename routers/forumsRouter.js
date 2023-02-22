@@ -18,6 +18,10 @@ class ForumsRouter {
     );
     router.post("/newForum", this.controller.addOne.bind(this.controller));
     router.post("/newPost", this.controller.addOnePost.bind(this.controller));
+    router.post(
+      "/deletePost",
+      this.controller.deleteOnePost.bind(this.controller),
+    );
     return router;
   }
 }
