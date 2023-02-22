@@ -36,10 +36,8 @@ module.exports = {
         allowNull: false,
         // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-      },
-      message: {
-        type: Sequelize.STRING,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal("gen_random_uuid()"),
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -68,9 +66,10 @@ module.exports = {
     await queryInterface.createTable("messages", {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal("gen_random_uuid()"),
       },
       message: {
         type: Sequelize.STRING,

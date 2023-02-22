@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Message.init(
     {
-      message: DataTypes.STRING,
+      message: DataTypes.UUID,
       chatroom_id: {
         type: DataTypes.UUID,
         references: {
