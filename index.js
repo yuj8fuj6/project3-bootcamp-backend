@@ -113,7 +113,12 @@ io.on("connection", (socket) => {
         {
           model: user,
           as: "authorUser",
-          attributes: ["first_name", "last_name", "profile_pic_url"],
+          attributes: [
+            "first_name",
+            "last_name",
+            "profile_pic_url",
+            "email_address",
+          ],
         },
       ],
       order: ["created_at"],
