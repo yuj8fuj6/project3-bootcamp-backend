@@ -1,6 +1,8 @@
 const cors = require("cors");
 const express = require("express");
 require("dotenv").config();
+const http = require("http");
+const { Server } = require("socket.io");
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
@@ -54,6 +56,21 @@ app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3001",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+server.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
 });
