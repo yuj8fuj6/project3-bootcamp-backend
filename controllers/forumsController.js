@@ -30,13 +30,23 @@ class ForumsController extends BaseController {
     }
   }
 
-  // async addOne (req, res){
-  //   try {
-  //     // const newForum = await this.model
-  //   } catch (err) {
-  //     return res.status(400).json({ error: true, msg: err });
-  //   }
-  // }
+  async addOne(req, res) {
+    const { title, description, course_id } = req.body;
+    try {
+      const newForum = await this.model.create({
+        title: title,
+        description: description,
+        course_id: course_id,
+      });
+      console.log("created new forum");
+      const allForums = await this.model.findAll({
+        include: [{ model: this.courseModel }, { model: this.postModel }],
+      });
+      return res.json(allForums);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 
   async filterCourses(req, res) {
     try {
