@@ -67,7 +67,7 @@ const io = new Server(server, {
 });
 
 // NOT WORKING
-// let usersInRoom = [];
+let usersInRoom = [];
 // const addUser = (userId, socketId) => {
 //   !usersInRoom.some((user) => user.userId === userId) &&
 //     usersInRoom.push({ userId, socketId });
@@ -76,18 +76,31 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
+  socket.on("add_user", (userId) => {
+    usersInRoom[userId] = socket;
+    console.log(`User ${userId} with ${socket.id} added`);
+  });
+
   socket.on("join_room", async (data) => {
-    const { room, email_address } = data;
+    const { room } = data;
     socket.join(room);
-    const userJoined = await user.findOne({
+    console.log("EMAILS", data.email, data.email_address);
+    // Query for creator's and recipient's email
+    const creatorUser = await user.findOne({
       where: {
-        email_address,
+        email_address: data.email,
       },
     });
+    const recipientUser = await user.findOne({
+      where: {
+        email_address: data.email_address,
+      },
+    });
+
     const newRoom = await chatroom.findOrCreate({
       where: {
         room,
-        user_id: userJoined.id,
+        user_id: creatorUser.id,
       },
     });
     // To get the id of the room in chatroom.
@@ -97,13 +110,31 @@ io.on("connection", (socket) => {
         room,
       },
     });
-    const chatroomUsers = await chatroom_user.findOrCreate({
+    // Create 2 entries in the chatroom_user table
+    const chatroomUsersCreator = await chatroom_user.findOrCreate({
       where: {
-        userId: userJoined.id,
+        userId: creatorUser.id,
         chatroomId: roomId.id,
       },
     });
-    console.log("ROOM", newRoom, "JUNCTION TABLE", chatroomUsers);
+    const chatroomUsersRecipient = await chatroom_user.findOrCreate({
+      where: {
+        userId: recipientUser.id,
+        chatroomId: roomId.id,
+      },
+    });
+    console.log(
+      "ROOM",
+      newRoom,
+      "JUNCTION TABLE CREATOR",
+      chatroomUsersCreator,
+      "JUNCTION TABLE RECIPIENT",
+      chatroomUsersRecipient,
+      "CREATOR USER",
+      data.email,
+      "RECIPIENT USER",
+      data.email_address
+    );
 
     let allMessages = await message.findAll({
       where: {
@@ -134,35 +165,49 @@ io.on("connection", (socket) => {
     // });
   });
 
-  socket.on("send_message", async (data) => {
-    const authorUser = await user.findOne({
-      where: {
-        email_address: data.sender,
-      },
+  // socket.on("send_message", async (data) => {
+  //   const authorUser = await user.findOne({
+  //     where: {
+  //       email_address: data.sender,
+  //     },
+  //   });
+  //   const roomId = await chatroom.findOne({
+  //     where: {
+  //       room: data.room,
+  //     },
+  //   });
+  //   try {
+  //     let newMessage = await message.create({
+  //       message: data.message,
+  //       author_user_id: authorUser.id,
+  //       chatroom_id: roomId.id,
+  //       time: data.time,
+  //     });
+  //     console.log("NEW MESSAGE", newMessage);
+  //   } catch (error) {
+  //     console.log("ERROR", error);
+  //   }
+  //   socket.to(data.room).emit("receive_message", data);
+  //   console.log(data);
+  //   console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
+  //   console.log(`${authorUser.id} sent ${roomId.id} in room ${data.room}`);
+  // });
+
+  socket.on("send_message", (data) => {
+    const { recipientId, messageData } = data;
+    const recipientSocket = usersInRoom[recipientId];
+    io.to(recipientSocket).emit("receive_message", {
+      senderId: socket.id,
+      messageData,
     });
-    const roomId = await chatroom.findOne({
-      where: {
-        room: data.room,
-      },
-    });
-    try {
-      let newMessage = await message.create({
-        message: data.message,
-        author_user_id: authorUser.id,
-        chatroom_id: roomId.id,
-        time: data.time,
-      });
-      console.log("NEW MESSAGE", newMessage);
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-    socket.to(data.room).emit("receive_message", data);
-    console.log(data);
-    console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
-    console.log(`${authorUser.id} sent ${roomId.id} in room ${data.room}`);
+    console.log("SEND MESSAGE", recipientId, messageData, recipientSocket);
   });
 
   socket.on("disconnect", () => {
+    const userId = Object.keys(usersInRoom).find(
+      (key) => usersInRoom[key] === socket
+    );
+    delete usersInRoom[userId];
     console.log("User Disconnected", socket.id);
   });
 });
