@@ -66,36 +66,33 @@ const io = new Server(server, {
   },
 });
 
-// NOT WORKING
 let usersInRoom = [];
-// const addUser = (userId, socketId) => {
-//   !usersInRoom.some((user) => user.userId === userId) &&
-//     usersInRoom.push({ userId, socketId });
-// };
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("add_user", async (userId) => {
+  socket.on("join", (userId) => {
     usersInRoom[userId] = socket;
     console.log(`User ${userId} with ${socket.id} added`);
 
-    // const joinedUser = await user.findOne({
-    //   where: {
-    //     email_address: userId,
-    //   },
-    // });
-    // try {
-    //   let allConversations = await chatroom_user.findAll({
-    //     where: {
-    //       user_id: joinedUser.id,
-    //     },
-    //   });
-    //   socket.emit("show_conversation", allConversations);
-    //   console.log("ALL CONVERSATIONS", allConversations, joinedUser.id);
-    // } catch (error) {
-    //   console.log("ERROR", error);
-    // }
+    socket.on("get_conversation", async () => {
+      const joinedUser = await user.findOne({
+        where: {
+          email_address: userId,
+        },
+      });
+      try {
+        let allConversation = await chatroom_user.findAll({
+          where: {
+            user_id: joinedUser.id,
+          },
+        });
+        socket.emit("show_conversation", allConversation);
+        console.log("SHOW CONVERSATION", allConversation, joinedUser.id);
+      } catch (error) {
+        console.log("ERROR", error);
+      }
+    });
   });
 
   socket.on("join_room", async (data) => {
