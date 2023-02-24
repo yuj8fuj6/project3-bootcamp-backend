@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.course);
       this.belongsToMany(models.admin, { through: "adminForums" });
       this.hasMany(models.post);
+      this.hasMany(models.postUpvote);
     }
   }
   Forum.init(

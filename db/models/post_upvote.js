@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Post_Upvote extends Model {
+  class PostUpvote extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,9 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.student);
       this.belongsTo(models.post);
+      this.belongsTo(models.forum);
     }
   }
-  Post_Upvote.init(
+  PostUpvote.init(
     {
       upvote: DataTypes.BOOLEAN,
       post_id: {
@@ -23,12 +24,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         references: { model: "student", key: "id" },
       },
+      forum_id: {
+        type: DataTypes.UUID,
+        references: { model: "forum", key: "id" },
+      },
     },
     {
       sequelize,
-      modelName: "post_upvote",
+      modelName: "postUpvote",
       underscored: true,
     },
   );
-  return Post_Upvote;
+  return PostUpvote;
 };

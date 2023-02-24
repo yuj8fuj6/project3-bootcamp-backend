@@ -25,6 +25,7 @@ const {
   prerequisite,
   post,
   adminForum,
+  postUpvote,
 } = db;
 
 // initializing Controllers
@@ -34,7 +35,13 @@ const coursesController = new CoursesController(
   courseIndex,
   prerequisite,
 );
-const forumsController = new ForumsController(forum, course, post, adminForum);
+const forumsController = new ForumsController(
+  forum,
+  course,
+  post,
+  adminForum,
+  postUpvote,
+);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();

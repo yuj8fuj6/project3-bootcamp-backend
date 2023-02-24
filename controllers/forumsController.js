@@ -3,11 +3,12 @@ const BaseController = require("./baseController");
 const { Op } = require("sequelize");
 
 class ForumsController extends BaseController {
-  constructor(model, courseModel, postModel, adminForumModel) {
+  constructor(model, courseModel, postModel, adminForumModel, postUpvoteModel) {
     super(model);
     this.courseModel = courseModel;
     this.postModel = postModel;
     this.adminForumModel = adminForumModel;
+    this.postUpvoteModel = postUpvoteModel;
   }
 
   async getAll(req, res) {
@@ -94,6 +95,54 @@ class ForumsController extends BaseController {
         include: [{ model: this.courseModel }, { model: this.postModel }],
       });
       return res.json(allForums);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async addOneVote(req, res) {
+    const { upvote, post_id, student_id, forum_id } = req.body;
+    try {
+      const [newPostVote, created] = await this.postUpvoteModel.findOrCreate({
+        where: {
+          upvote: upvote,
+          post_id: post_id,
+          student_id: student_id,
+          forum_id: forum_id,
+        },
+      });
+      if (!created) {
+        await newPostVote.destroy();
+      }
+      const { count, rows } = await this.postUpvoteModel.findAndCountAll({
+        where: { post_id: post_id },
+        include: [{ model: this.postModel }],
+      });
+      console.log(count);
+      const currentPost = await this.postModel.findOne({
+        where: { id: post_id },
+      });
+
+      currentPost.upvote = count;
+      await currentPost.save({ fields: ["upvote"] });
+
+      const allForums = await this.model.findAll({
+        include: [{ model: this.courseModel }, { model: this.postModel }],
+      });
+      return res.json(allForums);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async getForumVote(req, res) {
+    const { forumID } = req.params;
+    console.log(forumID);
+    try {
+      const postVotes = await this.postUpvoteModel.count({
+        where: { forum_id: forumID },
+      });
+      return res.json(postVotes);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
