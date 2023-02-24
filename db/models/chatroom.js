@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   Chatroom.init(
     {
       room: DataTypes.STRING,
-      user_id: {
-        type: DataTypes.UUID,
-        references: { model: "user", key: "id" },
-      },
     },
     {
       sequelize,

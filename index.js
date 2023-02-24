@@ -76,9 +76,26 @@ let usersInRoom = [];
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("add_user", (userId) => {
+  socket.on("add_user", async (userId) => {
     usersInRoom[userId] = socket;
     console.log(`User ${userId} with ${socket.id} added`);
+
+    // const joinedUser = await user.findOne({
+    //   where: {
+    //     email_address: userId,
+    //   },
+    // });
+    // try {
+    //   let allConversations = await chatroom_user.findAll({
+    //     where: {
+    //       user_id: joinedUser.id,
+    //     },
+    //   });
+    //   socket.emit("show_conversation", allConversations);
+    //   console.log("ALL CONVERSATIONS", allConversations, joinedUser.id);
+    // } catch (error) {
+    //   console.log("ERROR", error);
+    // }
   });
 
   socket.on("join_room", async (data) => {
@@ -100,9 +117,9 @@ io.on("connection", (socket) => {
     const newRoom = await chatroom.findOrCreate({
       where: {
         room,
-        user_id: creatorUser.id,
       },
     });
+    console.log("NEW ROOM", newRoom);
     // To get the id of the room in chatroom.
     // Without this, I can only get the name of the room
     const roomId = await chatroom.findOne({
@@ -110,6 +127,7 @@ io.on("connection", (socket) => {
         room,
       },
     });
+    console.log("ROOM ID", roomId);
     // Create 2 entries in the chatroom_user table
     const chatroomUsersCreator = await chatroom_user.findOrCreate({
       where: {
@@ -165,42 +183,31 @@ io.on("connection", (socket) => {
     // });
   });
 
-  // socket.on("send_message", async (data) => {
-  //   const authorUser = await user.findOne({
-  //     where: {
-  //       email_address: data.sender,
-  //     },
-  //   });
-  //   const roomId = await chatroom.findOne({
-  //     where: {
-  //       room: data.room,
-  //     },
-  //   });
-  //   try {
-  //     let newMessage = await message.create({
-  //       message: data.message,
-  //       author_user_id: authorUser.id,
-  //       chatroom_id: roomId.id,
-  //       time: data.time,
-  //     });
-  //     console.log("NEW MESSAGE", newMessage);
-  //   } catch (error) {
-  //     console.log("ERROR", error);
-  //   }
-  //   socket.to(data.room).emit("receive_message", data);
-  //   console.log(data);
-  //   console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
-  //   console.log(`${authorUser.id} sent ${roomId.id} in room ${data.room}`);
-  // });
-
-  socket.on("send_message", (data) => {
-    const { recipientId, messageData } = data;
-    const recipientSocket = usersInRoom[recipientId];
-    io.to(recipientSocket).emit("receive_message", {
-      senderId: socket.id,
-      messageData,
+  socket.on("send_message", async (data) => {
+    const authorUser = await user.findOne({
+      where: {
+        email_address: data.sender,
+      },
     });
-    console.log("SEND MESSAGE", recipientId, messageData, recipientSocket);
+    const roomId = await chatroom.findOne({
+      where: {
+        room: data.room,
+      },
+    });
+    try {
+      let newMessage = await message.create({
+        message: data.message,
+        author_user_id: authorUser.id,
+        chatroom_id: roomId.id,
+        time: data.time,
+      });
+      console.log("NEW MESSAGE", newMessage);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+    socket.to(data.room).emit("receive_message", data);
+    console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
+    console.log(`${data.sender} sent ${data.message} in room ${roomId}`);
   });
 
   socket.on("disconnect", () => {
