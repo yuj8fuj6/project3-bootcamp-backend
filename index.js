@@ -114,6 +114,27 @@ io.on("connection", (socket) => {
       },
     });
 
+    const existingRoom = await chatroom.findOne({
+      include: [
+        {
+          model: user,
+          where: {
+            id: creatorUser.id,
+          },
+        },
+        {
+          model: user,
+          where: {
+            id: recipientUser.id,
+          },
+        },
+      ],
+    });
+    if (existingRoom) {
+      console.log("CHATROOM ALREADY EXISTS", existingRoom);
+      return existingRoom;
+    }
+
     const newRoom = await chatroom.findOrCreate({
       where: {
         room,
