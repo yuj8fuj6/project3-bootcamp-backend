@@ -2,10 +2,11 @@ const BaseController = require("./baseController");
 const { Op } = require("sequelize");
 
 class ChatroomController extends BaseController {
-  constructor(model, userModel, messageModel) {
+  constructor(model, userModel, messageModel, chatroomModel) {
     super(model);
     this.userModel = userModel;
     this.messageModel = messageModel;
+    this.chatroomModel = chatroomModel;
   }
 
   async getAllConversations(req, res) {
@@ -32,6 +33,10 @@ class ChatroomController extends BaseController {
               "profile_pic_url",
               "email_address",
             ],
+          },
+          {
+            model: this.chatroomModel,
+            attributes: ["room"],
           },
           {
             model: this.messageModel,

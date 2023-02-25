@@ -3,7 +3,6 @@ const express = require("express");
 require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
-const { Op } = require("sequelize");
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
@@ -46,7 +45,8 @@ const forumsController = new ForumsController(forum, course, post, adminForum);
 const conversationController = new ConversationController(
   chatroom_user,
   user,
-  message
+  message,
+  chatroom
 );
 
 // initializing Routers
@@ -158,7 +158,7 @@ io.on("connection", async (socket) => {
       "RECIPIENT USER",
       data.email_address
     );
-    socket.emit("chatroom_name", newRoom);
+    socket.emit("chatroom_name", room);
     console.log("NEW ROOM HERE", room, newRoom);
     let allMessages = await message.findAll({
       where: {
