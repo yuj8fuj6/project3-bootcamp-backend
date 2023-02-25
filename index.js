@@ -2,6 +2,17 @@ const cors = require("cors");
 const express = require("express");
 require("dotenv").config();
 
+const { auth } = require("express-oauth2-jwt-bearer");
+
+const domain = process.env.AUTH0_DOMAIN;
+const audience = process.env.AUTH0_AUDIENCE;
+
+//Authorization middleware
+const checkJwt = auth({
+  audience: `${audience}`,
+  issuerBaseURL: `${domain}`,
+});
+
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
 const CoursesRouter = require("./routers/coursesRouter");
@@ -44,9 +55,9 @@ const forumsController = new ForumsController(
 );
 
 // initializing Routers
-const userRouter = new UsersRouter(usersController).routes();
-const courseRouter = new CoursesRouter(coursesController).routes();
-const forumRouter = new ForumsRouter(forumsController).routes();
+const userRouter = new UsersRouter(usersController, checkJwt).routes();
+const courseRouter = new CoursesRouter(coursesController, checkJwt).routes();
+const forumRouter = new ForumsRouter(forumsController, checkJwt).routes();
 
 const PORT = process.env.PORT;
 const app = express();
