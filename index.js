@@ -79,6 +79,7 @@ const io = new Server(server, {
 });
 
 let users = [];
+const chatroomClients = new Map();
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -86,6 +87,18 @@ io.on("connection", (socket) => {
   socket.on("add_user", (userId) => {
     users[userId] = socket;
     console.log(`User ${userId} with ${socket.id} added`);
+  });
+
+  // to allow user to join chatroom when they click on conversation
+  // this is specifically for socket connection between 2 users in a room
+  socket.on("join_chatroom", (chatroomId) => {
+    socket.join(chatroomId);
+    console.log(`${socket.id} joined chatroom ${chatroomId}`);
+
+    if (!chatroomClients.has(chatroomId)) {
+      chatroomClients.set(chatroomId, new Set());
+    }
+    chatroomClients.get(chatroomId).add(socket.id);
   });
 
   socket.on("create_room", async (data) => {
@@ -165,48 +178,7 @@ io.on("connection", (socket) => {
     );
     socket.emit("chatroom_name", room);
     console.log("NEW ROOM HERE", room, newRoom);
-    let allMessages = await message.findAll({
-      where: {
-        chatroom_id: roomId.id,
-      },
-      include: [
-        {
-          model: user,
-          as: "authorUser",
-          attributes: [
-            "first_name",
-            "last_name",
-            "profile_pic_url",
-            "email_address",
-          ],
-        },
-      ],
-      order: ["created_at"],
-    });
-    socket.emit("send_chatData", allMessages);
-    console.log("ALL MESSAGES", allMessages);
   });
-
-  //  let allMessages = await message.findAll({
-  //    where: {
-  //      chatroom_id: roomId.id,
-  //    },
-  //    include: [
-  //      {
-  //        model: user,
-  //        as: "authorUser",
-  //        attributes: [
-  //          "first_name",
-  //          "last_name",
-  //          "profile_pic_url",
-  //          "email_address",
-  //        ],
-  //      },
-  //    ],
-  //    order: ["created_at"],
-  //  });
-  //  socket.emit("message_history", allMessages);
-  //  console.log("ALL MESSAGES", allMessages);
 
   socket.on("send_message", async (data) => {
     const authorUser = await user.findOne({
@@ -231,13 +203,24 @@ io.on("connection", (socket) => {
       console.log("ERROR", error);
     }
     socket.to(data.room).emit("receive_message", data);
-    console.log(`${data.sender} sent ${data.message} in room ${data.room}`);
+    console.log(
+      `${data.sender} sent ${data.message} in room ${data.room}, ${data}`
+    );
     console.log(`${data.sender} sent ${data.message} in room ${roomId}`);
   });
 
   socket.on("disconnect", () => {
     const userId = Object.keys(users).find((key) => users[key] === socket);
     delete users[userId];
+    for (const [chatroomId, clients] of chatroomClients.entries()) {
+      if (clients.has(socket.id)) {
+        clients.delete(socket.id);
+        console.log(`${socket.id} left chatroom ${chatroomId}`);
+        if (clients.size === 0) {
+          chatroomClients.delete(chatroomId);
+        }
+      }
+    }
     console.log("User Disconnected", socket.id);
   });
 });
