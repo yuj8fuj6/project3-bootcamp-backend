@@ -49,6 +49,32 @@ class ChatroomController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+  async getMessages(req, res) {
+    const { chatroomId } = req.params;
+    try {
+      const chatroomMessages = await this.messageModel.findAll({
+        where: {
+          chatroom_id: chatroomId,
+        },
+        include: [
+          {
+            model: this.userModel,
+            as: "authorUser",
+            attributes: [
+              "first_name",
+              "last_name",
+              "profile_pic_url",
+              "email_address",
+            ],
+          },
+        ],
+        order: ["created_at"],
+      });
+      return res.json(chatroomMessages);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 }
 
 module.exports = ChatroomController;

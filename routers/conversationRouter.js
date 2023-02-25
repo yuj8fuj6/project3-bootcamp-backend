@@ -11,6 +11,10 @@ class ChatroomRouter {
       "/:email",
       this.controller.getAllConversations.bind(this.controller)
     );
+    router.get(
+      "/messages/:chatroomId",
+      this.controller.getMessages.bind(this.controller)
+    );
     return router;
   }
 }

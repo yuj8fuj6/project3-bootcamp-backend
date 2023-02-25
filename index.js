@@ -78,10 +78,15 @@ const io = new Server(server, {
   },
 });
 
-let usersInRoom = [];
+let users = [];
 
-io.on("connection", async (socket) => {
+io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
+
+  socket.on("add_user", (userId) => {
+    users[userId] = socket;
+    console.log(`User ${userId} with ${socket.id} added`);
+  });
 
   socket.on("create_room", async (data) => {
     const { room } = data;
@@ -200,7 +205,7 @@ io.on("connection", async (socket) => {
   //    ],
   //    order: ["created_at"],
   //  });
-  //  socket.emit("send_chatData", allMessages);
+  //  socket.emit("message_history", allMessages);
   //  console.log("ALL MESSAGES", allMessages);
 
   socket.on("send_message", async (data) => {
@@ -231,10 +236,8 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("disconnect", () => {
-    const userId = Object.keys(usersInRoom).find(
-      (key) => usersInRoom[key] === socket
-    );
-    delete usersInRoom[userId];
+    const userId = Object.keys(users).find((key) => users[key] === socket);
+    delete users[userId];
     console.log("User Disconnected", socket.id);
   });
 });
