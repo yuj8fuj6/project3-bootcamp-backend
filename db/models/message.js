@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "authorUser",
         foreignKey: "author_user_id",
       });
+      this.hasMany(models.chatroom_user);
     }
   }
   Message.init(

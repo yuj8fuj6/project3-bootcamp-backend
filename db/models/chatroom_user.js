@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.chatroom);
-      this.belongsTo(models.user, { through: "chatroom_user" });
+      this.belongsTo(models.user);
+      this.hasMany(models.message);
     }
   }
   Chatroom_user.init(
@@ -26,6 +27,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         references: {
           model: "user",
+          key: "id",
+        },
+      },
+      message_id: {
+        type: DataTypes.UUID,
+        references: {
+          model: "message",
           key: "id",
         },
       },

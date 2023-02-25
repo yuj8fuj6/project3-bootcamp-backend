@@ -24,6 +24,50 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.createTable("messages", {
+      id: {
+        allowNull: false,
+        // autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal("gen_random_uuid()"),
+      },
+      message: {
+        type: Sequelize.STRING,
+      },
+      author_user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      chatroom_user_chatroom_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "chatrooms",
+          key: "id",
+        },
+      },
+      chatroom_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "chatrooms",
+          key: "id",
+        },
+      },
+      time: {
+        type: DataTypes.TIME,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
     await queryInterface.createTable("chatroom_users", {
       id: {
         allowNull: false,
@@ -46,43 +90,12 @@ module.exports = {
           key: "id",
         },
       },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
-
-    await queryInterface.createTable("messages", {
-      id: {
-        allowNull: false,
-        // autoIncrement: true,
-        primaryKey: true,
+      message_id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.literal("gen_random_uuid()"),
-      },
-      message: {
-        type: Sequelize.STRING,
-      },
-      author_user_id: {
-        type: Sequelize.INTEGER,
         references: {
-          model: "users",
+          model: "messages",
           key: "id",
         },
-      },
-      chatroom_id: {
-        type: Sequelize.UUID,
-        references: {
-          model: "chatrooms",
-          key: "id",
-        },
-      },
-      time: {
-        type: DataTypes.TIME,
       },
       created_at: {
         allowNull: false,

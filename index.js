@@ -3,16 +3,19 @@ const express = require("express");
 require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
+const { Op } = require("sequelize");
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
 const CoursesRouter = require("./routers/coursesRouter");
 const ForumsRouter = require("./routers/forumsRouter");
+const ConversationRouter = require("./routers/conversationRouter");
 
 // importing Controllers
 const UsersController = require("./controllers/usersController");
 const CoursesController = require("./controllers/coursesController");
 const ForumsController = require("./controllers/forumsController");
+const ConversationController = require("./controllers/conversationController");
 
 // importing DB
 const db = require("./db/models/index");
@@ -40,11 +43,19 @@ const coursesController = new CoursesController(
   prerequisite
 );
 const forumsController = new ForumsController(forum, course, post, adminForum);
+const conversationController = new ConversationController(
+  chatroom_user,
+  user,
+  message
+);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
 const courseRouter = new CoursesRouter(coursesController).routes();
 const forumRouter = new ForumsRouter(forumsController).routes();
+const conversationRouter = new ConversationRouter(
+  conversationController
+).routes();
 
 const PORT = process.env.PORT;
 const app = express();
@@ -58,6 +69,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
+app.use("/conversations", conversationRouter);
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -71,31 +83,7 @@ let usersInRoom = [];
 io.on("connection", async (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join", (userId) => {
-    usersInRoom[userId] = socket;
-    console.log(`User ${userId} with ${socket.id} added`);
-
-    socket.on("get_conversation", async () => {
-      const joinedUser = await user.findOne({
-        where: {
-          email_address: userId,
-        },
-      });
-      try {
-        let allConversation = await chatroom_user.findAll({
-          where: {
-            user_id: joinedUser.id,
-          },
-        });
-        socket.emit("show_conversation", allConversation);
-        console.log("SHOW CONVERSATION", allConversation, joinedUser.id);
-      } catch (error) {
-        console.log("ERROR", error);
-      }
-    });
-  });
-
-  socket.on("join_room", async (data) => {
+  socket.on("create_room", async (data) => {
     const { room } = data;
     socket.join(room);
     console.log("EMAILS", data.email, data.email_address);
@@ -137,7 +125,6 @@ io.on("connection", async (socket) => {
         room,
       },
     });
-    console.log("NEW ROOM", newRoom);
     // To get the id of the room in chatroom.
     // Without this, I can only get the name of the room
     const roomId = await chatroom.findOne({
@@ -171,7 +158,8 @@ io.on("connection", async (socket) => {
       "RECIPIENT USER",
       data.email_address
     );
-
+    socket.emit("chatroom_name", newRoom);
+    console.log("NEW ROOM HERE", room, newRoom);
     let allMessages = await message.findAll({
       where: {
         chatroom_id: roomId.id,
@@ -192,14 +180,28 @@ io.on("connection", async (socket) => {
     });
     socket.emit("send_chatData", allMessages);
     console.log("ALL MESSAGES", allMessages);
-
-    // NOT WORKING
-    // socket.on("add_user", (userId) => {
-    //   addUser(userId, socket.id);
-    //   io.emit("get_users", usersInRoom);
-    //   console.log("USERS IN ROOM", usersInRoom);
-    // });
   });
+
+  //  let allMessages = await message.findAll({
+  //    where: {
+  //      chatroom_id: roomId.id,
+  //    },
+  //    include: [
+  //      {
+  //        model: user,
+  //        as: "authorUser",
+  //        attributes: [
+  //          "first_name",
+  //          "last_name",
+  //          "profile_pic_url",
+  //          "email_address",
+  //        ],
+  //      },
+  //    ],
+  //    order: ["created_at"],
+  //  });
+  //  socket.emit("send_chatData", allMessages);
+  //  console.log("ALL MESSAGES", allMessages);
 
   socket.on("send_message", async (data) => {
     const authorUser = await user.findOne({
