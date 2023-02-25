@@ -1,40 +1,38 @@
 const cors = require("cors");
-const express = require("express");
+const express = require('express');
 require("dotenv").config();
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
-const CoursesRouter = require("./routers/coursesRouter");
-const ForumsRouter = require("./routers/forumsRouter");
+const CourseRouter = require("./routers/coursesRouter")
+const ForumsRouter = require("./routers/forumsRouter")
 
 // importing Controllers
 const UsersController = require("./controllers/usersController");
-const CoursesController = require("./controllers/coursesController");
-const ForumsController = require("./controllers/forumsController");
+const CoursesController = require("./controllers/coursesController")
+const ForumsController = require("./controllers/forumsController")
 
 // importing DB
 const db = require("./db/models/index");
 const {
+  forum,
+  prerequisite,
+  post,
+  adminForum,
+  postUpvote,
   user,
   student,
   professor,
   admin,
   course,
-  forum,
-  courseIndex,
-  prerequisite,
-  post,
-  adminForum,
-  postUpvote,
+  course_indice,
+  course_registration,
+  student_course,
 } = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-const coursesController = new CoursesController(
-  course,
-  courseIndex,
-  prerequisite,
-);
+
 const forumsController = new ForumsController(
   forum,
   course,
@@ -42,10 +40,17 @@ const forumsController = new ForumsController(
   adminForum,
   postUpvote,
 );
+const courseController = new CoursesController(
+  student,
+  course,
+  course_indice,
+  course_registration,
+  student_course
+);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
-const courseRouter = new CoursesRouter(coursesController).routes();
+const courseRouter = new CourseRouter(courseController).routes();
 const forumRouter = new ForumsRouter(forumsController).routes();
 
 const PORT = process.env.PORT;

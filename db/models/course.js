@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.prerequisite);
-      this.hasMany(models.courseIndex);
+      this.hasMany(models.course_indice);
       this.hasOne(models.forum);
+      this.belongsToMany(models.student, { through: "student_course" });
     }
   }
   Course.init(
