@@ -41,6 +41,36 @@ class UsersController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+
+  // Update profile photo URL
+  async updatePhotoURL(req, res) {
+    const { photoURL, user_id } = req.body;
+    try {
+      const currentUser = await this.model.findOne({
+        where: { id: user_id },
+      });
+      currentUser.profile_pic_url = photoURL;
+      await currentUser.save({ fields: ["profile_pic_url"] });
+      return res.json(currentUser);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  // Update profile photo URL
+  async updateProfile(req, res) {
+    const { phone_number, user_id } = req.body;
+    try {
+      const currentUser = await this.model.findOne({
+        where: { id: user_id },
+      });
+      currentUser.phone_number = phone_number;
+      await currentUser.save({ fields: ["phone_number"] });
+      return res.json(currentUser);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 }
 
 module.exports = UsersController;
