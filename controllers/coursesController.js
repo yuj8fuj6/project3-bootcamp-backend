@@ -7,13 +7,12 @@ class CoursesController extends BaseController {
     this.indexModel = indexModel;
     this.courseRegModel = courseRegModel;
     this.studentCourse = student_course;
-    console.log(student_course);
   }
 
   // Retrieve specific sighting
   async getCourses(req, res) {
     const { course_code } = req.params;
-    let course_codes = course_code.split("+")
+    let course_codes = course_code.split("+");
     try {
       const courses = await this.course.findAll({
         where: { course_code: course_codes },
@@ -25,17 +24,17 @@ class CoursesController extends BaseController {
     }
   }
 
-  async getStudentCourse(req, res) {
+  async getTimeslot(req, res) {
+    const { index, course_code } = req.params;
+    console.log(index)
+    let indexes = index.split("+");
+    let course_codes = course_code.split("+")
     try {
-      const { id } = req.params;
-      const student = await this.model.findAll({
-        where: { user_id: id },
+      const timeslots = await this.course.findAll({
+        where: { course_code: course_codes },
+        include: { model: this.indexModel, where: { index_code: indexes } },
       });
-      const studentID = student[0].dataValues.id;
-      const studentCourses = await this.studentCourse.findAll({
-        where: {student_id: studentID}
-      })
-      return res.json(studentCourses);
+      return res.json(timeslots);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
