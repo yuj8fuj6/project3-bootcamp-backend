@@ -15,6 +15,11 @@ const ForumsController = require("./controllers/forumsController")
 // importing DB
 const db = require("./db/models/index");
 const {
+  forum,
+  prerequisite,
+  post,
+  adminForum,
+  postUpvote,
   user,
   student,
   professor,
@@ -27,6 +32,14 @@ const {
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
+
+const forumsController = new ForumsController(
+  forum,
+  course,
+  post,
+  adminForum,
+  postUpvote,
+);
 const courseController = new CoursesController(
   student,
   course,
@@ -34,7 +47,6 @@ const courseController = new CoursesController(
   course_registration,
   student_course
 );
-const forumsController = new ForumsController()
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();

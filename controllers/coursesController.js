@@ -1,5 +1,7 @@
 const BaseController = require("./baseController");
 
+const { Op } = require("sequelize");
+
 class CoursesController extends BaseController {
   constructor(model, course, indexModel, courseRegModel, student_course) {
     super(model);

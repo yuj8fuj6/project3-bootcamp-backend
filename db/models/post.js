@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.student); 
-      this.hasMany(models.post_upvote);
+      this.belongsTo(models.student);
+      this.hasMany(models.postUpvote);
       this.belongsTo(models.forum);
     }
   }
@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       forum_id: {
         type: DataTypes.UUID,
         references: { model: "forum", key: "id" },
+      },
+      upvote: {
+        type: DataTypes.INTEGER,
       },
     },
     {

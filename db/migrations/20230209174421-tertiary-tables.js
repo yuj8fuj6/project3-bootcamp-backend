@@ -62,6 +62,10 @@ module.exports = {
           key: "id",
         },
       },
+      upvote: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -95,6 +99,14 @@ module.exports = {
         type: Sequelize.UUID,
         references: {
           model: "students",
+          key: "id",
+        },
+      },
+      forum_id: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: "forums",
           key: "id",
         },
       },
