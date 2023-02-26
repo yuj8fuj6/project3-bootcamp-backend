@@ -10,6 +10,7 @@ class CoursesRouter {
     router.get("/", this.controller.getAll.bind(this.controller));
     router.get("/:course_code", this.controller.getCourses.bind(this.controller));
     router.get("/:course_code/:index", this.controller.getTimeslot.bind(this.controller));
+    router.post("/register/:id/:indexID", this.controller.registerCourse.bind(this.controller))
     return router;
   }
 }

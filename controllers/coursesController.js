@@ -9,6 +9,7 @@ class CoursesController extends BaseController {
     this.indexModel = indexModel;
     this.courseRegModel = courseRegModel;
     this.studentCourse = student_course;
+    console.log(this.courseRegModel)
   }
 
   // Retrieve specific sighting
@@ -38,6 +39,30 @@ class CoursesController extends BaseController {
       });
       return res.json(timeslots);
     } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async registerCourse(req,res){
+    //change to body and test
+    const { studentID, indexes } = req.body;
+    console.log("irun")
+    let arr = indexes.map((index, i) => {
+      console.log(index)
+      console.log(i)
+      let data = {
+        student_id: studentID,
+        course_indice_id: index,
+
+      };
+      return data
+    })
+    try{
+      const registerCourse = await this.courseRegModel.bulkCreate(arr);
+      console.log("course registered");
+      //query and send back the updated data
+      return res.json(registerCourse);
+    } catch (err){
       return res.status(400).json({ error: true, msg: err });
     }
   }

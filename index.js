@@ -16,7 +16,6 @@ const ForumsController = require("./controllers/forumsController")
 const db = require("./db/models/index");
 const {
   forum,
-  prerequisite,
   post,
   adminForum,
   postUpvote,
@@ -65,6 +64,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
