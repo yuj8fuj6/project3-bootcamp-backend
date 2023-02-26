@@ -119,10 +119,64 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.createTable("course_registrations", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      student_id: {
+        type: DataTypes.UUID,
+        references: {
+          model: "students",
+          key: "id",
+        },
+      },
+      course_index_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "course_indices",
+          key: "id",
+        },
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      }
+    });
+    await queryInterface.createTable("student_courses", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      student_id: {
+        type: DataTypes.UUID,
+        references: {
+          model: "students",
+          key: "id",
+        },
+      },
+      course_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "courses",
+          key: "id",
+        },
+      },
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("admin_forums");
     await queryInterface.dropTable("posts");
     await queryInterface.dropTable("post_upvotes");
+    await queryInterface.dropTable("course_registrations");
+    await queryInterface.dropTable("student_courses");
   },
 };
