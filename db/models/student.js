@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.user);
       this.hasMany(models.post);
-      this.hasMany(models.post_upvote);
+      this.hasMany(models.postUpvote);
+      this.belongsToMany(models.course_indice, {
+        through: "course_registrations",
+      });
+      this.belongsToMany(models.course, { through: "student_courses" });
     }
   }
   Student.init(

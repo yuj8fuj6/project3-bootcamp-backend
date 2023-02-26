@@ -8,6 +8,8 @@ class CoursesRouter {
   routes() {
     // we will insert routes into here later on
     router.get("/", this.controller.getAll.bind(this.controller));
+    router.get("/:course_code", this.controller.getCourses.bind(this.controller));
+    router.get("/:course_code/:index", this.controller.getTimeslot.bind(this.controller));
     return router;
   }
 }

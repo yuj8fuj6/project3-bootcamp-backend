@@ -6,7 +6,7 @@ const { Server } = require("socket.io");
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
-const CoursesRouter = require("./routers/coursesRouter");
+const CourseRouter = require("./routers/coursesRouter");
 const ForumsRouter = require("./routers/forumsRouter");
 const ConversationRouter = require("./routers/conversationRouter");
 
@@ -19,16 +19,19 @@ const ConversationController = require("./controllers/conversationController");
 // importing DB
 const db = require("./db/models/index");
 const {
+  forum,
+  prerequisite,
+  post,
+  adminForum,
+  postUpvote,
   user,
   student,
   professor,
   admin,
   course,
-  forum,
-  courseIndex,
-  prerequisite,
-  post,
-  adminForum,
+  course_indice,
+  course_registration,
+  student_course,
   chatroom,
   chatroom_user,
   message,
@@ -36,22 +39,31 @@ const {
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-const coursesController = new CoursesController(
+
+const forumsController = new ForumsController(
+  forum,
   course,
-  courseIndex,
-  prerequisite
+  post,
+  adminForum,
+  postUpvote
 );
-const forumsController = new ForumsController(forum, course, post, adminForum);
 const conversationController = new ConversationController(
   chatroom_user,
   user,
   message,
   chatroom
 );
+const courseController = new CoursesController(
+  student,
+  course,
+  course_indice,
+  course_registration,
+  student_course
+);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController).routes();
-const courseRouter = new CoursesRouter(coursesController).routes();
+const courseRouter = new CourseRouter(courseController).routes();
 const forumRouter = new ForumsRouter(forumsController).routes();
 const conversationRouter = new ConversationRouter(
   conversationController

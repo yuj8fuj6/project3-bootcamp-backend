@@ -1,21 +1,42 @@
 const BaseController = require("./baseController");
 
+const { Op } = require("sequelize");
+
 class CoursesController extends BaseController {
-  constructor(model, courseIndexModel, prerequisiteModel) {
+  constructor(model, course, indexModel, courseRegModel, student_course) {
     super(model);
-    this.courseIndexModel = courseIndexModel;
-    this.prerequisiteModel = prerequisiteModel;
+    this.course = course;
+    this.indexModel = indexModel;
+    this.courseRegModel = courseRegModel;
+    this.studentCourse = student_course;
   }
 
-  async getAll(req, res) {
+  // Retrieve specific sighting
+  async getCourses(req, res) {
+    const { course_code } = req.params;
+    let course_codes = course_code.split("+");
     try {
-      const allCourses = await this.model.findAll({
-        include: [
-          { model: this.courseIndexModel },
-          { model: this.prerequisiteModel },
-        ],
+      const courses = await this.course.findAll({
+        where: { course_code: course_codes },
+        include: [{ model: this.indexModel }],
       });
-      return res.json(allCourses);
+      return res.json(courses);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async getTimeslot(req, res) {
+    const { index, course_code } = req.params;
+    console.log(index)
+    let indexes = index.split("+");
+    let course_codes = course_code.split("+")
+    try {
+      const timeslots = await this.course.findAll({
+        where: { course_code: course_codes },
+        include: { model: this.indexModel, where: { index_code: indexes } },
+      });
+      return res.json(timeslots);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
