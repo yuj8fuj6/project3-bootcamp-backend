@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       index_code: DataTypes.INTEGER,
       location: DataTypes.STRING,
       course_code: DataTypes.STRING,
+      course_name: DataTypes.STRING,
     },
     {
       sequelize,
