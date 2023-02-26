@@ -1,5 +1,5 @@
 const cors = require("cors");
-const express = require('express');
+const express = require("express");
 require("dotenv").config();
 
 const { auth } = require("express-oauth2-jwt-bearer");
@@ -15,13 +15,15 @@ const checkJwt = auth({
 
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
-const CoursesRouter = require("./routers/coursesRouter")
-const ForumsRouter = require("./routers/forumsRouter")
+const CoursesRouter = require("./routers/coursesRouter");
+const ForumsRouter = require("./routers/forumsRouter");
+const LocationsRouter = require("./routers/locationsRouter");
 
 // importing Controllers
 const UsersController = require("./controllers/usersController");
-const CoursesController = require("./controllers/coursesController")
-const ForumsController = require("./controllers/forumsController")
+const CoursesController = require("./controllers/coursesController");
+const ForumsController = require("./controllers/forumsController");
+const LocationsController = require("./controllers/locationsController");
 
 // importing DB
 const db = require("./db/models/index");
@@ -39,12 +41,11 @@ const {
   course_indice,
   course_registration,
   student_course,
-  location, 
+  location,
 } = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-
 const forumsController = new ForumsController(
   forum,
   course,
@@ -57,13 +58,15 @@ const coursesController = new CoursesController(
   course,
   course_indice,
   course_registration,
-  student_course
+  student_course,
 );
+const locationsController = new LocationsController(location);
 
 // initializing Routers
 const userRouter = new UsersRouter(usersController, checkJwt).routes();
 const courseRouter = new CoursesRouter(coursesController, checkJwt).routes();
 const forumRouter = new ForumsRouter(forumsController, checkJwt).routes();
+const locationRouter = new LocationsRouter(locationsController, checkJwt).routes();
 
 const PORT = process.env.PORT;
 const app = express();
@@ -77,6 +80,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
+app.use("/locations", locationRouter);
 
 app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
