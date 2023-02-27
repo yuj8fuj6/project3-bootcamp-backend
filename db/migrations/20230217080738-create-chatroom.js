@@ -49,13 +49,6 @@ module.exports = {
           key: "id",
         },
       },
-      chatroom_id: {
-        type: Sequelize.UUID,
-        references: {
-          model: "chatrooms",
-          key: "id",
-        },
-      },
       time: {
         type: DataTypes.TIME,
       },
@@ -108,8 +101,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("chatroom_users");
     await queryInterface.dropTable("messages");
+    await queryInterface.dropTable("chatroom_users");
     await queryInterface.dropTable("chatrooms");
   },
 };

@@ -198,6 +198,7 @@ io.on("connection", (socket) => {
         email_address: data.sender,
       },
     });
+    console.log("AUTHOR", authorUser);
     const roomId = await chatroom.findOne({
       where: {
         room: data.room,

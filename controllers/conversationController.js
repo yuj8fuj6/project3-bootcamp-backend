@@ -17,11 +17,6 @@ class ChatroomController extends BaseController {
       },
     });
     try {
-      /* query all chatrooms current user is in
-
-                query all chatrooms containing same chatroom_id
-
-      } */
       const allChatRoomsUserIsIn = await this.model.findAll({
         where: {
           user_id: joinedUser.id,
@@ -58,38 +53,6 @@ class ChatroomController extends BaseController {
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
-
-    //     const allConversations = await this.model.findAll({
-    //       where: {
-    //         user_id: {
-    //           // !== joinedUser.id
-    //           [Op.ne]: joinedUser.id,
-    //         },
-    //       },
-    //       include: [
-    //         {
-    //           model: this.userModel,
-    //           attributes: [
-    //             "first_name",
-    //             "last_name",
-    //             "profile_pic_url",
-    //             "email_address",
-    //           ],
-    //         },
-    //         {
-    //           model: this.chatroomModel,
-    //           attributes: ["room"],
-    //         },
-    //         {
-    //           model: this.messageModel,
-    //           attributes: ["message"],
-    //         },
-    //       ],
-    //     });
-    //     return res.json(allConversations);
-    //   } catch (err) {
-    //     return res.status(400).json({ error: true, msg: err });
-    //   }
   }
   async getMessages(req, res) {
     const { chatroomId } = req.params;
@@ -113,6 +76,31 @@ class ChatroomController extends BaseController {
         order: ["created_at"],
       });
       return res.json(chatroomMessages);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+  async deleteOneConversation(req, res) {
+    const { chatroomId } = req.body;
+    console.log("CHATROOM TO DELETE", chatroomId);
+    try {
+      const deleteConversation = await this.model.findOne({
+        where: {
+          chatroom_id: chatroomId,
+        },
+        include: [
+          {
+            model: this.messageModel,
+          },
+          {
+            model: this.chatroomModel,
+          },
+        ],
+      });
+      console.log("DELETE CONVERSATION", deleteConversation);
+      await deleteConversation.destroy();
+      console.log("DELETED CONVERSATION");
+      return res.json(deleteConversation);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

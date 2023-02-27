@@ -15,6 +15,10 @@ class ChatroomRouter {
       "/messages/:chatroomId",
       this.controller.getMessages.bind(this.controller)
     );
+    router.post(
+      "/deleteConversation",
+      this.controller.deleteOneConversation.bind(this.controller)
+    );
     return router;
   }
 }
