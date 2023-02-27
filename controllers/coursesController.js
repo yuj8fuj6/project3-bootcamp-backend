@@ -44,16 +44,13 @@ class CoursesController extends BaseController {
   }
 
   async registerCourse(req,res){
-    //change to body and test
     const { studentID, indexes } = req.body;
-    console.log("irun")
     let arr = indexes.map((index, i) => {
       console.log(index)
       console.log(i)
       let data = {
         student_id: studentID,
         course_indice_id: index,
-
       };
       return data
     })
@@ -69,13 +66,18 @@ class CoursesController extends BaseController {
 
   async getRegisteredCourses(req, res){
     const { student_id } = req.params;
+    console.log(student_id)
     try{
       const registeredCourses = await this.courseRegModel.findAll({
         where: { student_id: student_id },
-        include: [{ model: this.indexModel }],
       });
-      console.log("course registered")
-      return res.json(registeredCourses)
+      const registeredCoursesID = registeredCourses.map(x => x.course_indice_id)
+      const registered = await this.indexModel.findAll({
+        where: {id: registeredCoursesID},
+        include: {model: this.course}
+      })
+      console.log(registered)
+      return res.json(registered);
     }
     catch(err){
       return res.status(400).json({ error: true, msg: err });
