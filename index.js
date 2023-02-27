@@ -20,7 +20,6 @@ const ConversationController = require("./controllers/conversationController");
 const db = require("./db/models/index");
 const {
   forum,
-  prerequisite,
   post,
   adminForum,
   postUpvote,
