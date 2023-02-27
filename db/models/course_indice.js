@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.course);
-      this.belongsToMany(models.student, { through: "course_registration" });
+      this.belongsToMany(models.student, { through: "course_registrations" });
     }
   }
   CourseIndices.init(
