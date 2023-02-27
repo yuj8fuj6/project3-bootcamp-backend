@@ -66,6 +66,21 @@ class CoursesController extends BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+
+  async getRegisteredCourses(req, res){
+    const { student_id } = req.params;
+    try{
+      const registeredCourses = await this.courseRegModel.findAll({
+        where: { student_id: student_id },
+        include: [{ model: this.indexModel }],
+      });
+      console.log("course registered")
+      return res.json(registeredCourses)
+    }
+    catch(err){
+      return res.status(400).json({ error: true, msg: err });
+    }
+  } 
 }
 
 module.exports = CoursesController;
