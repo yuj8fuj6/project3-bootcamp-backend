@@ -4,9 +4,21 @@ require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
 
+const { auth } = require("express-oauth2-jwt-bearer");
+
+const domain = process.env.AUTH0_DOMAIN;
+const audience = process.env.AUTH0_AUDIENCE;
+
+//Authorization middleware
+const checkJwt = auth({
+  audience: `${audience}`,
+  issuerBaseURL: `${domain}`,
+});
+
 // importing Routers
 const UsersRouter = require("./routers/usersRouter");
-const CourseRouter = require("./routers/coursesRouter");
+const LocationsRouter = require("./routers/locationsRouter");
+const CoursesRouter = require("./routers/coursesRouter");
 const ForumsRouter = require("./routers/forumsRouter");
 const ConversationRouter = require("./routers/conversationRouter");
 
@@ -14,6 +26,7 @@ const ConversationRouter = require("./routers/conversationRouter");
 const UsersController = require("./controllers/usersController");
 const CoursesController = require("./controllers/coursesController");
 const ForumsController = require("./controllers/forumsController");
+const LocationsController = require("./controllers/locationsController");
 const ConversationController = require("./controllers/conversationController");
 
 // importing DB
@@ -31,14 +44,15 @@ const {
   course_indice,
   course_registration,
   student_course,
+  location,
   chatroom,
   chatroom_user,
   message,
+  prerequisite, 
 } = db;
 
 // initializing Controllers
 const usersController = new UsersController(user, student, professor, admin);
-
 const forumsController = new ForumsController(
   forum,
   course,
@@ -50,22 +64,28 @@ const conversationController = new ConversationController(
   chatroom_user,
   user,
   message,
-  chatroom
+  chatroom,
 );
-const courseController = new CoursesController(
+const coursesController = new CoursesController(
   student,
   course,
   course_indice,
   course_registration,
-  student_course
+  student_course,
+  prerequisite, 
 );
+const locationsController = new LocationsController(location);
 
 // initializing Routers
-const userRouter = new UsersRouter(usersController).routes();
-const courseRouter = new CourseRouter(courseController).routes();
-const forumRouter = new ForumsRouter(forumsController).routes();
+const userRouter = new UsersRouter(usersController, checkJwt).routes();
+const courseRouter = new CoursesRouter(coursesController, checkJwt).routes();
+const forumRouter = new ForumsRouter(forumsController, checkJwt).routes();
+const locationRouter = new LocationsRouter(
+  locationsController,
+  checkJwt,
+).routes();
 const conversationRouter = new ConversationRouter(
-  conversationController
+  conversationController,
 ).routes();
 
 const PORT = process.env.PORT;
@@ -80,6 +100,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
+app.use("/locations", locationRouter);
 app.use("/conversations", conversationRouter);
 
 const server = http.createServer(app);
@@ -185,7 +206,7 @@ io.on("connection", (socket) => {
       "CREATOR USER",
       data.email,
       "RECIPIENT USER",
-      data.email_address
+      data.email_address,
     );
     socket.emit("chatroom_name", room);
     console.log("NEW ROOM HERE", room, newRoom);
@@ -216,7 +237,7 @@ io.on("connection", (socket) => {
     }
     io.in(data.room).emit("receive_message", data);
     console.log(
-      `${data.sender} sent ${data.message} in room ${data.room}, ${data}`
+      `${data.sender} sent ${data.message} in room ${data.room}, ${data}`,
     );
     console.log(`${data.sender} sent ${data.message} in room ${roomId}`);
   });
