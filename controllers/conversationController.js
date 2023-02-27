@@ -84,7 +84,7 @@ class ChatroomController extends BaseController {
     const { chatroomId } = req.body;
     console.log("CHATROOM TO DELETE", chatroomId);
     try {
-      const deleteConversation = await this.model.findOne({
+      const deleteConversation = await this.model.findAll({
         where: {
           chatroom_id: chatroomId,
         },

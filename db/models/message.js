@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      time: DataTypes.TIME,
+      time: DataTypes.STRING,
     },
     {
       sequelize,

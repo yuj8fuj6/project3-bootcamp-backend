@@ -42,6 +42,9 @@ module.exports = {
           key: "id",
         },
       },
+      time: {
+        type: DataTypes.STRING,
+      },
       chatroom_user_chatroom_id: {
         type: Sequelize.UUID,
         references: {
@@ -49,8 +52,12 @@ module.exports = {
           key: "id",
         },
       },
-      time: {
-        type: DataTypes.TIME,
+      chatroom_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "chatrooms",
+          key: "id",
+        },
       },
       created_at: {
         allowNull: false,
