@@ -29,7 +29,6 @@ const LocationsController = require("./controllers/locationsController");
 const db = require("./db/models/index");
 const {
   forum,
-  prerequisite,
   post,
   adminForum,
   postUpvote,
@@ -81,6 +80,7 @@ app.use("/users", userRouter);
 app.use("/courses", courseRouter);
 app.use("/forums", forumRouter);
 app.use("/locations", locationRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
