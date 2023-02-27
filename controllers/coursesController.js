@@ -3,13 +3,21 @@ const BaseController = require("./baseController");
 const { Op } = require("sequelize");
 
 class CoursesController extends BaseController {
-  constructor(model, course, indexModel, courseRegModel, student_course) {
+  constructor(
+    model,
+    course,
+    indexModel,
+    courseRegModel,
+    student_course,
+    prerequisiteModel
+  ) {
     super(model);
     this.course = course;
     this.indexModel = indexModel;
     this.courseRegModel = courseRegModel;
     this.studentCourse = student_course;
-    console.log(this.courseRegModel)
+    this.prerequisiteModel = prerequisiteModel;
+    console.log(this.courseRegModel);
   }
 
   // Retrieve specific sighting
@@ -29,9 +37,9 @@ class CoursesController extends BaseController {
 
   async getTimeslot(req, res) {
     const { index, course_code } = req.params;
-    console.log(index)
+    console.log(index);
     let indexes = index.split("+");
-    let course_codes = course_code.split("+")
+    let course_codes = course_code.split("+");
     try {
       const timeslots = await this.course.findAll({
         where: { course_code: course_codes },
@@ -43,46 +51,47 @@ class CoursesController extends BaseController {
     }
   }
 
-  async registerCourse(req,res){
+  async registerCourse(req, res) {
     const { studentID, indexes } = req.body;
     let arr = indexes.map((index, i) => {
-      console.log(index)
-      console.log(i)
+      console.log(index);
+      console.log(i);
       let data = {
         student_id: studentID,
         course_indice_id: index,
       };
-      return data
-    })
-    try{
+      return data;
+    });
+    try {
       const registerCourse = await this.courseRegModel.bulkCreate(arr);
       console.log("course registered");
       //query and send back the updated data
       return res.json(registerCourse);
-    } catch (err){
+    } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
   }
 
-  async getRegisteredCourses(req, res){
+  async getRegisteredCourses(req, res) {
     const { student_id } = req.params;
-    console.log(student_id)
-    try{
+    console.log(student_id);
+    try {
       const registeredCourses = await this.courseRegModel.findAll({
         where: { student_id: student_id },
       });
-      const registeredCoursesID = registeredCourses.map(x => x.course_indice_id)
+      const registeredCoursesID = registeredCourses.map(
+        (x) => x.course_indice_id
+      );
       const registered = await this.indexModel.findAll({
-        where: {id: registeredCoursesID},
-        include: {model: this.course}
-      })
-      console.log(registered)
+        where: { id: registeredCoursesID },
+        include: { model: this.course },
+      });
+      console.log(registered);
       return res.json(registered);
-    }
-    catch(err){
+    } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
-  } 
+  }
 }
 
 module.exports = CoursesController;

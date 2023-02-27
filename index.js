@@ -34,6 +34,7 @@ const {
   chatroom,
   chatroom_user,
   message,
+  prerequisite,
 } = db;
 
 // initializing Controllers
@@ -57,7 +58,8 @@ const courseController = new CoursesController(
   course,
   course_indice,
   course_registration,
-  student_course
+  student_course,
+  prerequisite
 );
 
 // initializing Routers
