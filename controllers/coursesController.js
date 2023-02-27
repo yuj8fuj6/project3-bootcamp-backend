@@ -17,7 +17,20 @@ class CoursesController extends BaseController {
     this.courseRegModel = courseRegModel;
     this.studentCourse = student_course;
     this.prerequisiteModel = prerequisiteModel;
-    console.log(this.courseRegModel);
+  }
+
+  async getAll(req, res) {
+    try {
+      const allCourses = await this.course.findAll({
+        include: [
+          { model: this.indexModel },
+          { model: this.prerequisiteModel },
+        ],
+      });
+      return res.json(allCourses);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
   }
 
   // Retrieve specific sighting
