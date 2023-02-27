@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.student);
       this.hasOne(models.professor);
       this.hasOne(models.admin);
+      this.hasMany(models.message, {
+        as: "author",
+        foreignKey: "author_user_id",
+      });
     }
   }
   User.init(
@@ -37,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "user",
       underscored: true,
-    },
+    }
   );
   return User;
 };

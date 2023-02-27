@@ -147,7 +147,7 @@ module.exports = {
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-      }
+      },
     });
     await queryInterface.createTable("student_courses", {
       id: {

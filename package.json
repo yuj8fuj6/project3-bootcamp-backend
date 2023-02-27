@@ -2,7 +2,8 @@
   "name": "express-bootcamp-template",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "clean": "npx sequelize db:seed:undo:all  && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -11,6 +12,7 @@
     "nodemon": "^2.0.20",
     "pg": "^8.9.0",
     "sequelize": "^6.28.0",
+    "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
