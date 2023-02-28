@@ -85,7 +85,8 @@ const locationRouter = new LocationsRouter(
   checkJwt
 ).routes();
 const conversationRouter = new ConversationRouter(
-  conversationController
+  conversationController,
+  checkJwt
 ).routes();
 
 const PORT = process.env.PORT;
