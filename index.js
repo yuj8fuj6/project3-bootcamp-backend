@@ -236,7 +236,8 @@ io.on("connection", (socket) => {
     } catch (error) {
       console.log("ERROR", error);
     }
-    io.in(data.room).emit("receive_message", data);
+    // io.in(data.room).emit("receive_message", data);
+    socket.to(data.room).emit("receive_message", data);
     console.log(
       `${data.sender} sent ${data.message} in room ${data.room}, ${data}`
     );
