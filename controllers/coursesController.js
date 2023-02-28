@@ -9,7 +9,7 @@ class CoursesController extends BaseController {
     indexModel,
     courseRegModel,
     student_course,
-    prerequisiteModel,
+    prerequisiteModel
   ) {
     super(model);
     this.course = course;
@@ -93,7 +93,7 @@ class CoursesController extends BaseController {
         where: { student_id: student_id },
       });
       const registeredCoursesID = registeredCourses.map(
-        (x) => x.course_indice_id,
+        (x) => x.course_indice_id
       );
       const registered = await this.indexModel.findAll({
         where: { id: registeredCoursesID },

@@ -48,7 +48,7 @@ const {
   chatroom,
   chatroom_user,
   message,
-  prerequisite, 
+  prerequisite,
 } = db;
 
 // initializing Controllers
@@ -64,7 +64,7 @@ const conversationController = new ConversationController(
   chatroom_user,
   user,
   message,
-  chatroom,
+  chatroom
 );
 const coursesController = new CoursesController(
   student,
@@ -72,7 +72,7 @@ const coursesController = new CoursesController(
   course_indice,
   course_registration,
   student_course,
-  prerequisite, 
+  prerequisite
 );
 const locationsController = new LocationsController(location);
 
@@ -82,10 +82,11 @@ const courseRouter = new CoursesRouter(coursesController, checkJwt).routes();
 const forumRouter = new ForumsRouter(forumsController, checkJwt).routes();
 const locationRouter = new LocationsRouter(
   locationsController,
-  checkJwt,
+  checkJwt
 ).routes();
 const conversationRouter = new ConversationRouter(
   conversationController,
+  checkJwt
 ).routes();
 
 const PORT = process.env.PORT;
@@ -206,7 +207,7 @@ io.on("connection", (socket) => {
       "CREATOR USER",
       data.email,
       "RECIPIENT USER",
-      data.email_address,
+      data.email_address
     );
     socket.emit("chatroom_name", room);
     console.log("NEW ROOM HERE", room, newRoom);
@@ -236,8 +237,9 @@ io.on("connection", (socket) => {
       console.log("ERROR", error);
     }
     io.in(data.room).emit("receive_message", data);
+    // socket.to(data.room).emit("receive_message", data);
     console.log(
-      `${data.sender} sent ${data.message} in room ${data.room}, ${data}`,
+      `${data.sender} sent ${data.message} in room ${data.room}, ${data}`
     );
     console.log(`${data.sender} sent ${data.message} in room ${roomId}`);
   });

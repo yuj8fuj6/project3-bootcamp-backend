@@ -75,6 +75,7 @@ class ChatroomController extends BaseController {
         ],
         order: ["created_at"],
       });
+      console.log("CHATROOM MESSAGES", chatroomMessages);
       return res.json(chatroomMessages);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
