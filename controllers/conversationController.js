@@ -9,6 +9,8 @@ class ChatroomController extends BaseController {
     this.chatroomModel = chatroomModel;
   }
 
+  // I feel it should be easier to query all Conversations.
+  // shouldn' we just be able to query the chatroom_user table and include the associated models?
   async getAllConversations(req, res) {
     const { email } = req.params;
     const joinedUser = await this.userModel.findOne({
@@ -69,23 +71,24 @@ class ChatroomController extends BaseController {
               "first_name",
               "last_name",
               "profile_pic_url",
+              // email address can be sensitive data, please apply proper authentication for this route/function
               "email_address",
             ],
           },
         ],
         order: ["created_at"],
       });
-      console.log("CHATROOM MESSAGES", chatroomMessages);
       return res.json(chatroomMessages);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
   }
+  // if you say One, then do One, not all :)!
   async deleteOneConversation(req, res) {
     const { chatroomId } = req.body;
-    console.log("CHATROOM TO DELETE", chatroomId);
     try {
-      const deleteConversation = await this.model.findAll({
+      // findAll returns plural
+      const conversations = await this.model.findAll({
         where: {
           chatroom_id: chatroomId,
         },
@@ -98,10 +101,11 @@ class ChatroomController extends BaseController {
           },
         ],
       });
-      console.log("DELETE CONVERSATION", deleteConversation);
-      await deleteConversation.destroy();
-      console.log("DELETED CONVERSATION");
-      return res.json(deleteConversation);
+      // you effectively destroy all conversations if it is possible with .destroy on a collection of records
+      // what if conversations is empty or null? How to destroy?
+      await conversations.destroy();
+      // how can we return conversations that have been destroyed?
+      return res.json(conversations);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

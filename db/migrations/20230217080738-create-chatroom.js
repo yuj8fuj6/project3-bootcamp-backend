@@ -4,6 +4,7 @@ const { DataTypes } = require("sequelize");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // the name of the migration doesn't match the content. I expect only chatroom to be created, but then other tables also get created
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("chatrooms", {
       id: {

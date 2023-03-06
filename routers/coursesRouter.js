@@ -16,12 +16,13 @@ class CoursesRouter {
       "/:course_code/:index",
       this.controller.getTimeslot.bind(this.controller)
     );
+    // auth???
     router.post(
       "/register/:id/:uuid",
       this.controller.registerCourse.bind(this.controller)
     );
     router.get(
-      "/registered/user/:student_id/courses",
+      "/registered/:student_id/courses",
       this.controller.getRegisteredCourses.bind(this.controller)
     );
     return router;

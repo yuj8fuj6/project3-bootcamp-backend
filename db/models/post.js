@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         references: { model: "forum", key: "id" },
       },
+      // no content/message for a post?
       upvote: {
         type: DataTypes.INTEGER,
       },

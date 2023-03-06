@@ -2,6 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // your seed files are structured like I would want to see migrations as well!
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       "users",

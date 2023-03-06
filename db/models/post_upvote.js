@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   PostUpvote.init(
     {
+      // i almost feel like we don't need a boolean here but rather if a record exists, we got an upvote
       upvote: DataTypes.BOOLEAN,
       post_id: {
         type: DataTypes.UUID,

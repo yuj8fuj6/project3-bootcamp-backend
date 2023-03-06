@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Course_registration.init(
     {
+      // pk should be students_id + course_indices_id if that combination should be unique
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
