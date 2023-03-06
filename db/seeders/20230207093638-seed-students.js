@@ -2,6 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // do we need to manually generate and assign uuids? I think we can autogenerate these by defaultValues.
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       "students",

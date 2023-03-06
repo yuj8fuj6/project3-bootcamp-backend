@@ -15,6 +15,7 @@ class ChatroomRouter {
       "/messages/:chatroomId",
       this.controller.getMessages.bind(this.controller)
     );
+    // auth????
     router.post(
       "/deleteConversation",
       this.controller.deleteOneConversation.bind(this.controller)

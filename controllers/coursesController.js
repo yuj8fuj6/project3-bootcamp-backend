@@ -37,6 +37,7 @@ class CoursesController extends BaseController {
   async getCourses(req, res) {
     const { course_code } = req.params;
     let course_codes = course_code.split("+");
+    // you could use query params with an array here as well instead of concatenating with +'s
     try {
       const courses = await this.course.findAll({
         where: { course_code: course_codes },
@@ -50,7 +51,6 @@ class CoursesController extends BaseController {
 
   async getTimeslot(req, res) {
     const { index, course_code } = req.params;
-    console.log(index);
     let indexes = index.split("+");
     let course_codes = course_code.split("+");
     try {
@@ -65,19 +65,17 @@ class CoursesController extends BaseController {
   }
 
   async registerCourse(req, res) {
+    // I would suggest to make the FE send the objects over to the BE instead of having to run a map here. FE prepares the payload and should send over the finalized payload to the BE. BE accepts, validates, and then just stores it, since we don't deal with real business logic in this function.
     const { studentID, indexes } = req.body;
-    let arr = indexes.map((index, i) => {
-      console.log(index);
-      console.log(i);
-      let data = {
+    const data = indexes.map((index, i) => {
+      // You guys should really stop overusing console.logs so much and always remove them when done with a certain feature. It must be a pain in the ass to debug with all this spam everywhere
+      return {
         student_id: studentID,
         course_indice_id: index,
       };
-      return data;
     });
     try {
-      const registerCourse = await this.courseRegModel.bulkCreate(arr);
-      console.log("course registered");
+      const registerCourse = await this.courseRegModel.bulkCreate(data);
       //query and send back the updated data
       return res.json(registerCourse);
     } catch (err) {
@@ -87,19 +85,21 @@ class CoursesController extends BaseController {
 
   async getRegisteredCourses(req, res) {
     const { student_id } = req.params;
-    console.log(student_id);
     try {
-      const registeredCourses = await this.courseRegModel.findAll({
-        where: { student_id: student_id },
-      });
-      const registeredCoursesID = registeredCourses.map(
-        (x) => x.course_indice_id
-      );
+      // const registeredCourses = await this.courseRegModel.findAll({
+      //   where: { student_id: student_id },
+      // });
+      // const registeredCoursesID = registeredCourses.map(
+      //   (course) => course.course_indice_id
+      // );
       const registered = await this.indexModel.findAll({
         where: { id: registeredCoursesID },
-        include: { model: this.course },
+        include: [
+          { model: this.course }, 
+          { model: this.courseRegModel, where: { student_id }}, // would this solve the problem above here with registeredCourses and the map?
+        ],
       });
-      console.log(registered);
+      // this is quite confusing. The function is named getRegisteredCourses, but you return indices?
       return res.json(registered);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });

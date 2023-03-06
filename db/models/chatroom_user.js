@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Chatroom_user.init(
+    // add unique constraint / composite PK for chatroom_id and user_id so that can only exist once
     {
       chatroom_id: {
         type: DataTypes.UUID,

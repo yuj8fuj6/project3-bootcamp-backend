@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Location.init(
     {
+      // generally you seem to be quite lax with allowing null values across your tables
+      // what if lat is null, but long is not?
+      // we could add validation for that as well to check if both exist
       latitude: DataTypes.DECIMAL,
       longitude: DataTypes.DECIMAL,
       index_code: DataTypes.INTEGER,

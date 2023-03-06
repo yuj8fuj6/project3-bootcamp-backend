@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Student_course.init(
     {
+      // i think we should have a compound primary key made up of student_id and course_id here.
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

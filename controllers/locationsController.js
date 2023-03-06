@@ -1,5 +1,5 @@
 const BaseController = require("./baseController");
-
+// this file seems to be not completed but just a copy paste? Please correct me if I am wrong.
 class LocationsController extends BaseController {
   constructor(model) {
     super(model);
@@ -9,9 +9,11 @@ class LocationsController extends BaseController {
   async getOne(req, res) {
     const { email } = req.params;
     try {
+      // how can you retrieve a user when querying the location model?
       const user = await this.model.findOne({
         where: { email_address: email },
         include: [
+          // where are these models defined in this class?
           { model: this.studentModel },
           { model: this.professorModel },
           { model: this.adminModel },
@@ -23,7 +25,7 @@ class LocationsController extends BaseController {
     }
   }
 
-  // Retrieve all users
+  // can just use the BaseController getAll here
   async getAll(req, res) {
     try {
       const allLocations = await this.model.findAll();

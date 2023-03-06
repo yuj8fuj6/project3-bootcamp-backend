@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Student.init(
     {
+      // everything can be null here?
       user_id: {
         type: DataTypes.INTEGER,
         references: { model: "user", key: "id" },

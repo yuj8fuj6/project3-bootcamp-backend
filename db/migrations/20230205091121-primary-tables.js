@@ -1,6 +1,7 @@
 "use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // each table change one migration please. Don't follow this primary, secondary, tertiary example anymore
   async up(queryInterface, Sequelize) {
     //Users Table
     await queryInterface.createTable("users", {
